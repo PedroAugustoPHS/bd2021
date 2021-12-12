@@ -6,7 +6,17 @@
 import scrapy
 
 
-class TesteItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class myItem(scrapy.Item):
+    titulo = scrapy.Field()
+    desenvolvedora = scrapy.Field()
+    publicadora = scrapy.Field()
+    ano_publicacao = scrapy.Field()
+    categoria = scrapy.Field()
+    img_src = scrapy.Field()
+    descricao = scrapy.Field()
+    so = scrapy.Field()
+    cpu = scrapy.Field()
+    memoria_ram = scrapy.Field()
+    armazenamento = scrapy.Field()
+    gpu = scrapy.Field()
     pass
