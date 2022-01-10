@@ -14,15 +14,16 @@ CREATE TABLE bd2021.jogo(
 	id SERIAL,
 	titulo VARCHAR(100) NOT NULL,
 	desenvolvedora VARCHAR(100) NOT NULL,
-	categoria VARCHAR(20),
+	categoria VARCHAR(100),
 	descricao text,
-	publicadora VARCHAR(50),
-	ano_publicacao DATE,
+	publicadora VARCHAR(100),
+	ano_publicacao VARCHAR(100),
 	cpu VARCHAR(100),
 	gpu VARCHAR(100),
-	memoria_ram INT,
-	so VARCHAR(50),
-	armazenamento INT,
+	memoria_ram VARCHAR(100),
+	so VARCHAR(100),
+	armazenamento VARCHAR(100),
+	image VARCHAR(100),
 	CONSTRAINT pk_jogo PRIMARY KEY(id)
 );
 
