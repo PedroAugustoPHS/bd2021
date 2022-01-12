@@ -8,7 +8,13 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
-
+#usado no steam
+from scrapy.downloadermiddlewares.redirect import RedirectMiddleware
+import re 
+from scrapy import Request
+import logging
+logger = logging.getLogger(__name__)
+ 
 class TesteSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -101,3 +107,17 @@ class TesteDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class CircumventAgeCheckMiddleware(RedirectMiddleware):
+    def _redirect(self, redirected, request, spider, reason):
+        # Only overrule the default redirect behavior
+        # in the case of mature content checkpoints.
+        if not re.findall('app/(.*)/agecheck', redirected.url):
+            return super()._redirect(redirected, request, spider, reason)     
+
+        logger.debug(f"Button-type age check triggered for {request.url}.")
+
+        return Request(url=request.url,
+                    cookies={'mature_content': '1'},
+                    meta={'dont_cache': True},
+                    callback=spider.parse)
