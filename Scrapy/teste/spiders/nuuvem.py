@@ -1,19 +1,16 @@
 import scrapy
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
+from scrapy.spiders import Spider
 from teste.prices import myPrice
-class NuuvemCrawlSpider(CrawlSpider):
+class NuuvemCrawlSpider(Spider):
     name = 'nuuvemCrawl'
     allowed_domains = ['www.nuuvem.com']
-    start_urls = ['https://www.nuuvem.com/catalog/platforms/pc/sort/discount/sort-mode/desc']
+    start_urls = [
+        'https://www.nuuvem.com/item/my-time-at-portia',
+        "https://www.nuuvem.com/item/arms"
+    ]
 
-    preco_nuuvem = LinkExtractor()
-    rule_preco_nuuvem = Rule(preco_nuuvem, callback='parse_item', follow=False)
-    rules = (
-        rule_preco_nuuvem,
-    )
-
-    def parse_item(self, response):
+    def parse(self, response):
+        item = myPrice()
         real: str = response.xpath('//span[@class="product-price--val"]/span[@class="integer"]/text()').extract_first()
         centavo: str = response.xpath('//span[@class="product-price--val"]/span[@class="decimal"]/text()').extract_first()
         preco = (real + centavo)

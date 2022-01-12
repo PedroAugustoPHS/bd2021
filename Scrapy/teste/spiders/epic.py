@@ -1,19 +1,15 @@
 import scrapy
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
+from scrapy.spiders import Spider
 from teste.prices import myPrice
-class EpicCrawlSpider(CrawlSpider):
+class EpicCrawlSpider(Spider):
     name = 'epicCrawl'
     allowed_domains = ['epicgames.com']
-    start_urls = ['https://www.epicgames.com/store/pt-BR/browse?sortBy=title&sortDir=ASC&count=50']
+    start_urls = [
+        'https://www.epicgames.com/store/pt-BR/p/god-of-war',
+        'https://www.epicgames.com/store/pt-BR/p/naraka-bladepoint',
+    ]
 
-    preco_epic = LinkExtractor(restrict_css='.css-cnqlhg > .css-lrwy1y > div > div > div > a')
-    rule_preco_epic = Rule(preco_epic, callback='parse_item', follow=False)
-    rules = (
-        rule_preco_epic,
-    )
-
-    def parse_item(self, response):
+    def parse(self, response):
         item = myPrice()
         item['titulo'] =  response.css('.css-1p6kk8h::text').extract() or response.css('.css-j00jcq::text').extract()
         item['preco'] = (response.css('.css-l24hbj > .css-z3vg5b::text').extract()

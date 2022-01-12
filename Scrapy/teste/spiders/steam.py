@@ -1,23 +1,42 @@
 import scrapy
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
+from scrapy.spiders import Spider
 from teste.prices import myPrice
-class SteamCrawlSpider(CrawlSpider):
+from scrapy.http import FormRequest
+import logging
+logger = logging.getLogger(__name__)
+class SteamCrawlSpider(Spider):
     name = 'steamCrawl'
     allowed_domains = ['store.steampowered.com']
-    start_urls = ['https://store.steampowered.com/search/?term=ultrakill']
+    start_urls = ['https://store.steampowered.com/app/666140/My_Time_At_Portia/']
 
-    rule_link = LinkExtractor()
+    def parse(self, response):
+        if '/agecheck/app' in response.url:
+            
+            logger.debug(f"Button-type age check triggered for {response.url}.")
+            
+            form = response.css('#agegate_box form')
+            action = form.xpath('@action').extract_first()
+            name = form.xpath('input/@name').extract_first()
+            value = form.xpath('input/@value').extract_first()
+            
+            formdata = {
+            name: value,
+            'ageDay': '1',
+            'ageMonth': '1',
+            'ageYear': '2000'
+            }
+            
+            yield FormRequest(
+            url=action,
+            method='POST',
+            formdata=formdata,
+            callback=self.parse
+            )
+        else:
+            item = myPrice()
+            item['titulo'] = response.xpath('//div[@id="appHubAppName"]/text()').extract()
+            item['preco'] = response.xpath('//div[@class="game_purchase_price price"]/text()').extract() or response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_final_price"]/text()').extract()
+            item['preco_sem_desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_original_price"]/text()').extract() or "sem desconto"
+            item['desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_pct"]/text()').extract() or "sem desconto"
 
-    rule_preco_steam = Rule(rule_link , callback='parse_item', follow=False)
-    rules = (
-        rule_preco_steam,
-    )
-
-    def parse_item(self, response):
-        item = myPrice()
-        item['titulo'] = response.xpath('//div[@id="appHubAppName"]/text').extract()
-        item['preco'] = response.xpath('//div[@class="game_purchase_price price"]/text').extract()
-        #item['preco_sem_desconto'] = response.xpath('//div[@class="col search_price discounted responsive_secondrow"]/span/strike/text').extract()
-        #item['desconto'] = response.xpath('//div[@class="col search_discount responsive_secondrow"]/span/text').extract()
-        yield item
+            yield item
