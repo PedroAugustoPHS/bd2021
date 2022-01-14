@@ -26,7 +26,7 @@
         </c:forEach>
     </div>
     <p class="help-block">Ainda não é cadastrado?
-        <a href="${pageContext.servletContext.contextPath}/user/create">
+        <a href="${pageContext.servletContext.contextPath}/">
             Clique aqui
         </a>
     </p>

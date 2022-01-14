@@ -25,6 +25,12 @@
                     </a>
                 </p>
 
+                <p class="help-block">Joguin?
+                    <a href="${pageContext.servletContext.contextPath}/jogo">
+                        Clique aqui
+                    </a>
+                </p>
+
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
             </form>
 
