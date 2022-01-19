@@ -13,10 +13,15 @@
         <title>[User App] Login</title>
     </head>
     <body>
-        <div style="display: flex; justify-content: center;" class="container">
-            <div class="logo">
-                <img src="img/drip_games.png"/>
+        <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
+            <div style="display: flex;flex-direction: column;justify-content: center;" class="logo">
+                <h1>Drip games</h1>
+                <img
+                     src="${pageContext.request.contextPath}/img/drip_games.png"
+                     height="250px" width="450px"/>
             </div>
+            <br>
+            <br>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
                 <h2 class="form-signin-heading">Por favor, faça login.</h2>
 

@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%@include file="/view/include/head.jsp"  %>
-    <title>[User App] Jogo</title>
+    <title>Jogo</title>
 </head>
 <body>
 <div class="container">
@@ -26,7 +26,7 @@
         </c:forEach>
     </div>
     <p class="help-block">Ainda não é cadastrado?
-        <a href="${pageContext.servletContext.contextPath}/user/create">
+        <a href="${pageContext.servletContext.contextPath}/">
             Clique aqui
         </a>
     </p>
