@@ -13,7 +13,10 @@
         <title>[User App] Login</title>
     </head>
     <body>
-        <div class="container">
+        <div style="display: flex; justify-content: center;" class="container">
+            <div class="logo">
+                <img src="img/drip_games.png"/>
+            </div>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
                 <h2 class="form-signin-heading">Por favor, faça login.</h2>
 
@@ -24,7 +27,6 @@
                         Clique aqui
                     </a>
                 </p>
-
                 <p class="help-block">Joguin?
                     <a href="${pageContext.servletContext.contextPath}/jogo">
                         Clique aqui
