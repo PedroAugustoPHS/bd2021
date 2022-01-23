@@ -43,6 +43,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(
         name = "JogoController",
         urlPatterns = {
+                "",
                 "/jogo",
                 "/jogo/create",
                 "/jogo/read",
@@ -62,6 +63,7 @@ public class JogoController extends HttpServlet {
         RequestDispatcher dispatcher;
 
         switch (request.getServletPath()) {
+            case "":
             case "/jogo": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();

@@ -26,7 +26,7 @@ public class PgJogoDAO implements JogoDAO{
 
     private static final String UPDATE_QUERY =
             "UPDATE public.jogo " +
-                    "SET titulo = ?, desenvolvedora = ?, categoria = ?, descricao = ?, publicadora = ?, ano_publicacao = ?, cpu = ?, gpu = ?, memoria_ram = ?, so = ?, armazenamento = ? image = ? " +
+                    "SET titulo = ?, desenvolvedora = ?, categoria = ?, descricao = ?, publicadora = ?, ano_publicacao = ?, cpu = ?, gpu = ?, memoria_ram = ?, so = ?, armazenamento = ?, image = ? " +
                     "WHERE id = ?;";
 
     private static final String DELETE_QUERY =
@@ -34,7 +34,7 @@ public class PgJogoDAO implements JogoDAO{
                     "WHERE id = ?;";
 
     private static final String ALL_QUERY =
-            "SELECT id, titulo, image " +
+            "SELECT id, titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao, cpu, gpu, memoria_ram, so, armazenamento, image " +
                     "FROM public.jogo " +
                     "ORDER BY id;";
 
@@ -157,6 +157,16 @@ public class PgJogoDAO implements JogoDAO{
                     Jogo jogo = new Jogo();
                     jogo.setId(result.getInt("id"));
                     jogo.setTitulo(result.getString("titulo"));
+                    jogo.setDesenvolvedora(result.getString("desenvolvedora"));
+                    jogo.setCategoria(result.getString("categoria"));
+                    jogo.setDescricao(result.getString("descricao"));
+                    jogo.setPublicadora(result.getString("publicadora"));
+                    jogo.setAno_publicacao(result.getDate("ano_publicacao"));
+                    jogo.setCpu(result.getString("cpu"));
+                    jogo.setGpu(result.getString("gpu"));
+                    jogo.setMemoria_ram(result.getString("memoria_ram"));
+                    jogo.setSo(result.getString("so"));
+                    jogo.setArmazenamento(result.getString("armazenamento"));
                     jogo.setImage(result.getString("image"));
 
                     jogoList.add(jogo);

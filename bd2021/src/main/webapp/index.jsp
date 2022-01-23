@@ -32,7 +32,7 @@
                     </a>
                 </p>
                 <p class="help-block">Joguin?
-                    <a href="${pageContext.servletContext.contextPath}/jogo">
+                    <a href="${pageContext.servletContext.contextPath}/view/jogo">
                         Clique aqui
                     </a>
                 </p>
