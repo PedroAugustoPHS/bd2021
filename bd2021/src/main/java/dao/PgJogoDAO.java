@@ -38,6 +38,11 @@ public class PgJogoDAO implements JogoDAO{
                     "FROM public.jogo " +
                     "ORDER BY id;";
 
+    private static final String IMPORTANT_QUERY =
+            "SELECT id, titulo, image " +
+                    "FROM public.jogo " +
+                    "ORDER BY id;";
+
     public PgJogoDAO(Connection connection) {
         this.connection = connection;
     }
@@ -176,6 +181,27 @@ public class PgJogoDAO implements JogoDAO{
             }
 
             return jogoList;
+    }
+
+    @Override
+    public List<Jogo> showImportant() throws SQLException {
+        List<Jogo> jogoList = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(IMPORTANT_QUERY);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                Jogo jogo = new Jogo();
+                jogo.setId(result.getInt("id"));
+                jogo.setTitulo(result.getString("titulo"));
+                jogo.setImage(result.getString("image"));
+
+                jogoList.add(jogo);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Erro ao listar jogos.");
+        }
+
+        return jogoList;
     }
 
 
