@@ -15,7 +15,6 @@
     <body>
         <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
             <div style="display: flex;flex-direction: column;justify-content: center;" class="logo">
-                <h1>Drip games</h1>
                 <img
                      src="${pageContext.request.contextPath}/img/drip_games.png"
                      height="250px" width="450px"/>
@@ -33,7 +32,7 @@
                     </a>
                 </p>
                 <p class="help-block">Joguin?
-                    <a href="${pageContext.servletContext.contextPath}/jogo">
+                    <a href="${pageContext.servletContext.contextPath}/view/jogo">
                         Clique aqui
                     </a>
                 </p>

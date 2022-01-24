@@ -14,10 +14,10 @@
         <c:forEach var="jogo" items="${jogoList}">
             <tr>
                 <td>
-                    <span class="h4"><c:out value="${jogo.id}"/></span>
+                    <span class="h4">Id:<c:out value="${jogo.id}"/></span>
                 </td>
                 <td>
-                    <span class="h4"><c:out value="${jogo.titulo}"/></span>
+                    <span class="h4">Titulo:<c:out value="${jogo.titulo}"/></span>
                 </td>
                 <td>
                     <img src=${jogo.image}/>

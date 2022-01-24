@@ -43,6 +43,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(
         name = "JogoController",
         urlPatterns = {
+                "",
                 "/jogo",
                 "/jogo/create",
                 "/jogo/read",
@@ -57,11 +58,25 @@ public class JogoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DAO<Jogo> dao;
+        JogoDAO dao;
         Jogo jogo;
         RequestDispatcher dispatcher;
 
         switch (request.getServletPath()) {
+            case "": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+
+                    List<Jogo> jogoList = dao.showImportant();
+                    request.setAttribute("jogoList", jogoList);
+                } catch (ClassNotFoundException | IOException | SQLException ex) {
+                    request.getSession().setAttribute("error", ex.getMessage());
+                }
+
+                dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
             case "/jogo": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();
