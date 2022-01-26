@@ -14,7 +14,7 @@
     </head>
     <body>
         <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
-            <div style="display: flex;flex-direction: column;justify-content: center;" class="logo">
+            <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;" class="logo">
                 <img
                      src="${pageContext.request.contextPath}/img/drip_games.png"
                      height="250px" width="450px"/>
@@ -22,22 +22,21 @@
             <br>
             <br>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
-                <h2 class="form-signin-heading">Por favor, faça login.</h2>
+                <h2 class="form-signin-heading">Digite o nome do game</h2>
 
-                <input class="form-control" type="text" name="login" placeholder="Usuário" required autofocus>
-                <input class="form-control" type="password" name="senha" placeholder="Senha" required>
+                <input class="form-control" type="text" name="login" placeholder="Nome do jogo" required autofocus>
                 <p class="help-block">Ainda não é cadastrado?
                     <a href="${pageContext.servletContext.contextPath}/user/create">
                         Clique aqui
                     </a>
                 </p>
                 <p class="help-block">Joguin?
-                    <a href="${pageContext.servletContext.contextPath}/view/jogo">
+                    <a href="${pageContext.servletContext.contextPath}/jogo">
                         Clique aqui
                     </a>
                 </p>
 
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
             </form>
 
         </div>

@@ -10,27 +10,30 @@
 <body>
 <div class="container">
     <div class="col-12">
-        <h2>página do jogo</h2>
-        <c:forEach var="jogo" items="${jogoList}">
-            <tr>
-                <td>
-                    <span class="h4">Id:<c:out value="${jogo.id}"/></span>
-                </td>
-                <td>
-                    <span class="h4">Titulo:<c:out value="${jogo.titulo}"/></span>
-                </td>
-                <td>
-                    <img src=${jogo.image}/>
-                </td>
-            </tr>
-        </c:forEach>
+        <h1>Lista de jogos</h1>
+        <br>
+        <div class="container">
+            <div class="row">
+                    <c:forEach var="jogo" items="${jogoList}" varStatus="loop">
+                            <div class="col-4">
+                                <div class="card" style="width: 18rem;">
+                                    <div style="display:flex; flex-direction: column; justify-content: center; height: 10rem; background: black; padding: 25px; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
+                                        <img class="card-img-top" src=${jogo.image}/>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"><c:out value="${jogo.titulo}"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                    </c:forEach>
+            </div>
+        </div>
+        <p class="help-block">Ainda não é cadastrado?
+            <a href="${pageContext.servletContext.contextPath}/">
+                Clique aqui
+            </a>
+        </p>
     </div>
-    <p class="help-block">Ainda não é cadastrado?
-        <a href="${pageContext.servletContext.contextPath}/">
-            Clique aqui
-        </a>
-    </p>
-
 </div>
 
 <%@include file="/view/include/scripts.jsp"%>

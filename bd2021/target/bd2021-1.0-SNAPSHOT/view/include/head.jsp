@@ -14,4 +14,6 @@
 <!-- Font Awesome Icon toolkit -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <base href="${pageContext.servletContext.contextPath}" />

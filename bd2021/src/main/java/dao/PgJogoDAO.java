@@ -59,7 +59,7 @@ public class PgJogoDAO implements JogoDAO{
             statement.setString(3, jogo.getCategoria());
             statement.setString(4, jogo.getDescricao());
             statement.setString(5, jogo.getPublicadora());
-            statement.setDate(6, jogo.getAno_publicacao());
+            statement.setString(6, jogo.getAno_publicacao());
             statement.setString(7, jogo.getCpu());
             statement.setString(8, jogo.getGpu());
             statement.setString(9, jogo.getMemoria_ram());
@@ -88,7 +88,7 @@ public class PgJogoDAO implements JogoDAO{
                     jogo.setCategoria(result.getString("categoria"));
                     jogo.setDescricao(result.getString("descricao"));
                     jogo.setPublicadora(result.getString("publicadora"));
-                    jogo.setAno_publicacao(result.getDate("ano_publicacao"));
+                    jogo.setAno_publicacao(result.getString("ano_publicacao"));
                     jogo.setCpu(result.getString("cpu"));
                     jogo.setGpu(result.getString("gpu"));
                     jogo.setMemoria_ram(result.getString("memoria_ram"));
@@ -166,7 +166,7 @@ public class PgJogoDAO implements JogoDAO{
                     jogo.setCategoria(result.getString("categoria"));
                     jogo.setDescricao(result.getString("descricao"));
                     jogo.setPublicadora(result.getString("publicadora"));
-                    jogo.setAno_publicacao(result.getDate("ano_publicacao"));
+                    jogo.setAno_publicacao(result.getString("ano_publicacao"));
                     jogo.setCpu(result.getString("cpu"));
                     jogo.setGpu(result.getString("gpu"));
                     jogo.setMemoria_ram(result.getString("memoria_ram"));
@@ -203,6 +203,5 @@ public class PgJogoDAO implements JogoDAO{
 
         return jogoList;
     }
-
 
 }
