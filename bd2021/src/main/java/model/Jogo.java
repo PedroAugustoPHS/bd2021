@@ -9,7 +9,7 @@ public class Jogo {
     private String categoria;
     private String descricao;
     private String publicadora;
-    private Date ano_publicacao;
+    private String ano_publicacao;
     private String cpu;
     private String gpu;
     private String memoria_ram;
@@ -41,7 +41,7 @@ public class Jogo {
         return publicadora;
     }
 
-    public Date getAno_publicacao() {
+    public String getAno_publicacao() {
         return ano_publicacao;
     }
 
@@ -91,7 +91,7 @@ public class Jogo {
         this.publicadora = publicadora;
     }
 
-    public void setAno_publicacao(Date ano_publicacao) {
+    public void setAno_publicacao(String ano_publicacao) {
         this.ano_publicacao = ano_publicacao;
     }
 

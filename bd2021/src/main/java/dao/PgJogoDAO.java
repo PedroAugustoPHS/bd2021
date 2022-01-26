@@ -114,7 +114,7 @@ public class PgJogoDAO implements JogoDAO{
             statement.setString(3, jogo.getCategoria());
             statement.setString(4, jogo.getDescricao());
             statement.setString(5, jogo.getPublicadora());
-            statement.setDate(6, jogo.getAno_publicacao());
+            statement.setString(6, jogo.getAno_publicacao());
             statement.setString(7, jogo.getCpu());
             statement.setString(8, jogo.getGpu());
             statement.setString(9, jogo.getMemoria_ram());

@@ -5,8 +5,8 @@ CREATE SCHEMA bd2021;
 CREATE TABLE bd2021.loja(
 	id SERIAL,
 	nome VARCHAR(100),
-	loja_link VARCHAR(200),
-	loja_img VARCHAR(200),
+	loja_link VARCHAR(300),
+	loja_img VARCHAR(300),
 	CONSTRAINT pk_loja PRIMARY KEY(id)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE bd2021.jogo(
 	memoria_ram VARCHAR(100),
 	so VARCHAR(100),
 	armazenamento VARCHAR(100),
-	image VARCHAR(100),
+	image VARCHAR(300),
 	CONSTRAINT pk_jogo PRIMARY KEY(id)
 );
 
