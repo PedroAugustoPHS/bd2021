@@ -21,7 +21,6 @@ try:
     # Iterating through the json
     # list
 
-    {"SISTEMA OPERACIONAL: Windows XP SP3, Vista SP2, Windows 7ﾂｮ SP1, Windows 8 (versﾃｵes de 32 ou 64 bits)"}
     for i in data:
         title = (i["titulo"][0].replace("'",""))
         developer = (i["desenvolvedora"][0].replace("'",""))
