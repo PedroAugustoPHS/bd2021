@@ -19,9 +19,9 @@ CREATE TABLE bd2021.jogo(
 	publicadora VARCHAR(100),
 	ano_publicacao VARCHAR(100),
 	cpu VARCHAR(100),
-	gpu VARCHAR(100),
+	gpu VARCHAR(200),
 	memoria_ram VARCHAR(100),
-	so VARCHAR(100),
+	so VARCHAR(200),
 	armazenamento VARCHAR(100),
 	image VARCHAR(300),
 	CONSTRAINT pk_jogo PRIMARY KEY(id)
