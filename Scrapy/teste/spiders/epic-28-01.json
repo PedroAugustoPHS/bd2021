@@ -28,5 +28,5 @@
 {"titulo": ["FAR CRY 4"], "preco": ["R$ 26,99"], "preco_sem_desconto": ["R$ 89,99"], "desconto": ["-70%"]},
 {"titulo": ["Far Cry 5"], "preco": ["R$ 35,99"], "preco_sem_desconto": ["R$ 179,99"], "desconto": ["-80%"]},
 {"titulo": ["Overcooked! 2"], "preco": ["R$ 14,97"], "preco_sem_desconto": ["R$ 59,90"], "desconto": ["-75%"]},
-{"titulo": ["Just Die Already"], "preco": ["R$ 14,49"], "preco_sem_desconto": ["R$ 28,99"], "desconto": ["-50%"]}
+{"titulo": ["Just Die Already"], "preco": ["R$ 14,49"], "preco_sem_desconto": ["R$ 28,99"], "desconto": ["-50%"]}
 ]

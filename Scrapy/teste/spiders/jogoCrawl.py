@@ -36,6 +36,7 @@ class JogoCrawlSpider(Spider):
         'https://www.epicgames.com/store/pt-BR/p/far-cry-3',
         'https://www.epicgames.com/store/pt-BR/p/far-cry-4',
         'https://www.epicgames.com/store/pt-BR/p/far-cry-5',
+        'https://www.epicgames.com/store/pt-BR/p/just-die-already'
     ]
 
     def parse(self, response):
