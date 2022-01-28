@@ -44,6 +44,6 @@ class EpicCrawlSpider(Spider):
             or response.css('.css-l24hbj > .css-z3vg5b::text').extract()
         )
         item['preco_sem_desconto'] = response.xpath('//span[@class="css-11ksoqt"]/div[@class="css-1rcj98u"]/text()').extract() or '0'
-        item['desconto'] = response.xpath('//span[@class="css-15fdr99"]/div[@class="css-12j1mxw"]/text()').extract() or '0'
+        item['desconto'] = response.xpath('//div[@class="css-169q7x3"]/div[@class="css-fhxb3m"]/div[@class="css-l24hbj"]/span[@class="css-15fdr99"]/div/text()').extract() or '0' or response.xpath('//span[@class="css-15fdr99"]/div[@class="css-12j1mxw"]/text()').extract() or '0'
         #response.css('.css-15fdr99 > .css-12j1mxw::text').get()
         yield item
