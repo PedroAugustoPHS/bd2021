@@ -15,26 +15,26 @@ public class PgLojaDAO implements LojaDAO{
     private final Connection connection;
 
     private static final String CREATE_QUERY =
-            "INSERT INTO public.loja(nome, loja_link, loja_img) " +
+            "INSERT INTO bd2021.loja(nome, loja_link, loja_img) " +
                     "VALUES(?, ?, ?);";
 
     private static final String READ_QUERY =
             "SELECT id, nome, loja_link, loja_img " +
-                    "FROM public.loja " +
+                    "FROM bd2021.loja " +
                     "WHERE id = ?;";
 
     private static final String UPDATE_QUERY =
-            "UPDATE public.loja " +
+            "UPDATE bd2021.loja " +
                     "SET nome = ?, loja_link = ?, loja_img = ? " +
                     "WHERE id = ?;";
 
     private static final String DELETE_QUERY =
-            "DELETE FROM public.loja " +
+            "DELETE FROM bd2021.loja " +
                     "WHERE id = ?;";
 
     private static final String ALL_QUERY =
             "SELECT id, nome, loja_link, loja_img " +
-                    "FROM public.loja " +
+                    "FROM bd2021.loja " +
                     "ORDER BY id;";
 
     public PgLojaDAO(Connection connection) {

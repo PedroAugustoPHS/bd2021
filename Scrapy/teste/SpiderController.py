@@ -3,8 +3,8 @@ import json
 from GameIdGetter import get_gameid
 
 try:
-    connection = psycopg2.connect(user="anderson",
-                                  password="admin",
+    connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
                                   host="localhost",
                                   port="5432",
                                   database="kaster")

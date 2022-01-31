@@ -15,32 +15,32 @@ public class PgJogoDAO implements JogoDAO{
     private final Connection connection;
 
     private static final String CREATE_QUERY =
-            "INSERT INTO public.jogo(titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao " +
+            "INSERT INTO bd2021.jogo(titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao " +
                     "cpu, gpu, memoria_ram, so, armazenamento, image) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String READ_QUERY =
             "SELECT id, titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao, cpu, gpu, memoria_ram, so, armazenamento, image " +
-                    "FROM public.jogo " +
+                    "FROM bd2021.jogo " +
                     "WHERE id = ?;";
 
     private static final String UPDATE_QUERY =
-            "UPDATE public.jogo " +
+            "UPDATE bd2021.jogo " +
                     "SET titulo = ?, desenvolvedora = ?, categoria = ?, descricao = ?, publicadora = ?, ano_publicacao = ?, cpu = ?, gpu = ?, memoria_ram = ?, so = ?, armazenamento = ?, image = ? " +
                     "WHERE id = ?;";
 
     private static final String DELETE_QUERY =
-            "DELETE FROM public.jogo " +
+            "DELETE FROM bd2021.jogo " +
                     "WHERE id = ?;";
 
     private static final String ALL_QUERY =
             "SELECT id, titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao, cpu, gpu, memoria_ram, so, armazenamento, image " +
-                    "FROM public.jogo " +
+                    "FROM bd2021.jogo " +
                     "ORDER BY id;";
 
     private static final String IMPORTANT_QUERY =
             "SELECT id, titulo, image " +
-                    "FROM public.jogo " +
+                    "FROM bd2021.jogo " +
                     "ORDER BY id;";
 
     public PgJogoDAO(Connection connection) {

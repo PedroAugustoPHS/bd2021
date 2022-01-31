@@ -65,7 +65,7 @@ public class JogoController extends HttpServlet {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();
 
-                    List<Jogo> jogoList = dao.all();
+                    List<Jogo> jogoList = dao.showImportant();
                     request.setAttribute("jogoList", jogoList);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
@@ -96,6 +96,7 @@ public class JogoController extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/jogo");
                 }
                 break;
+
             }
             case "/jogo/delete": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
@@ -114,14 +115,14 @@ public class JogoController extends HttpServlet {
 
                     jogo = dao.read(Integer.parseInt(request.getParameter("id")));
 
-                    Gson gson = new GsonBuilder().setDateFormat("dd/MM/yyyy").create();
-                    String json = gson.toJson(jogo);
+                    request.setAttribute("jogo", jogo);
 
-                    response.getOutputStream().print(json);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
                     response.sendRedirect(request.getContextPath() + "/jogo");
                 }
+                dispatcher = request.getRequestDispatcher("/view/jogo/jogo.jsp");
+                dispatcher.forward(request, response);
                 break;
             }
         }

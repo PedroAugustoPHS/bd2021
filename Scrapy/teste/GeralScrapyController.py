@@ -3,8 +3,8 @@ import json
 import re
 
 try:
-    connection = psycopg2.connect(user="anderson",
-                                  password="admin",
+    connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
                                   host="localhost",
                                   port="5432",
                                   database="kaster")

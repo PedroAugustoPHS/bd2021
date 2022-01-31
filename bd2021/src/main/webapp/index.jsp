@@ -23,21 +23,20 @@
             <br>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
                 <h2 class="form-signin-heading">Digite o nome do game</h2>
-
-                <input class="form-control" type="text" name="login" placeholder="Nome do jogo" required autofocus>
+                <input class="form-control col-6" type="text" name="login" placeholder="Nome do jogo" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
                 <p class="help-block">Ainda não é cadastrado?
                     <a href="${pageContext.servletContext.contextPath}/user/create">
                         Clique aqui
                     </a>
                 </p>
-                <p class="help-block">Joguin?
-                    <a href="${pageContext.servletContext.contextPath}/view/jogo">
-                        Clique aqui
-                    </a>
-                </p>
-
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Buscar</button>
             </form>
+
+            <button class="btn btn-lg btn-primary btn-block" type="button">
+                <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo">
+                    Lista com todos os jogos
+                </a>
+            </button>
 
         </div>
 
