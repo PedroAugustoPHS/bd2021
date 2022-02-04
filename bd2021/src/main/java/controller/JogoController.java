@@ -48,7 +48,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
                 "/jogo/read",
                 "/jogo/update",
                 "/jogo/delete",
-                "/jogo/checkLogin"
+                "/jogo/checkLogin",
         }
 )
 public class JogoController extends HttpServlet {
@@ -77,7 +77,7 @@ public class JogoController extends HttpServlet {
             }
 
             case "/jogo/create": {
-                dispatcher = request.getRequestDispatcher("/view/user/create.jsp");
+                dispatcher = request.getRequestDispatcher("/view/jogo/create.jsp");
                 dispatcher.forward(request, response);
                 break;
             }

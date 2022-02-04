@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <%@include file="/view/include/head.jsp"  %>
     <title>Jogo</title>
 </head>
@@ -22,7 +21,6 @@
                                             <img class="card-img-top" src=${jogo.image}/>
                                         </div>
                                         <div class="card-body">
-                                            <span>${jogo.id}</span>
                                             <p class="card-text"><c:out value="${jogo.titulo}"/></p>
                                         </div>
                                     </a>
