@@ -4,36 +4,26 @@
  */
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import dao.DAO;
 import dao.DAOFactory;
 import dao.JogoDAO;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import model.Jogo;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Jogo;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 //import static sun.font.CreatedFontTracker.MAX_FILE_SIZE;
 
 /**
@@ -119,7 +109,6 @@ public class JogoController extends HttpServlet {
 
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
-                    response.sendRedirect(request.getContextPath() + "/jogo");
                 }
                 dispatcher = request.getRequestDispatcher("/view/jogo/jogo.jsp");
                 dispatcher.forward(request, response);
@@ -129,16 +118,58 @@ public class JogoController extends HttpServlet {
 
     }
 
+    private static void parseObj(JSONObject jogo) {
+        //get emp firstname, lastname, website
+        String fname = (String) jogo.get("titulo");
+        String lname = (String) jogo.get("desenvolvedora");
+        String website = (String) jogo.get("publicadora");
+        System.out.println("First Name: " + fname);
+        System.out.println("Last Name: " + lname);
+        System.out.println("Website: " + website);
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+
+        JogoDAO dao;
+        Jogo jogo = new Jogo();
+
+        String servletPath = request.getServletPath();
+
+        switch (request.getServletPath()) {
+
+            case "/jogo/create": {
+                String jsonname = request.getParameter("fileName");
+                JSONParser jsonP = new JSONParser();
+                try (FileReader reader = new FileReader("Users\\Guto\\IdeaProjects\\bd2021\\Scrapy\\teste\\spiders\\" + jsonname)) {
+                    //Read JSON File            /Users/Shared/crunchify.json
+                    Object obj = jsonP.parse(reader);
+                    JSONArray jogoList = (JSONArray) obj;
+                    System.out.println(jogoList);
+
+                    Iterator<JSONObject> iterator = jogoList.iterator();
+                    44
+                    while (iterator.hasNext()) {
+                        parseObj(iterator.next());
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 
     /**

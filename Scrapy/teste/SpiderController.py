@@ -36,6 +36,8 @@ try:
             price = i['preco'].replace(',','.').replace('R$','')
         except:
             price = i['preco'][0].replace(',','.').replace('R$','')
+        if game_id == '0':
+            continue
         postgres_insert_query =  "INSERT INTO bd2021.preco_data (data_registro, preco, porcentagem_promo, jogo_id, loja_id) VALUES (%s,%s,%s,%s,%s)"
         record_to_insert = (scrap_date,float(price),int(discount), game_id, loja_id)
         cursor.execute(postgres_insert_query, record_to_insert)
