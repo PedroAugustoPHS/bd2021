@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 //import static sun.font.CreatedFontTracker.MAX_FILE_SIZE;
 
@@ -118,11 +118,12 @@ public class JogoController extends HttpServlet {
 
     }
 
-    private static void parseObj(JSONObject jogo) {
-        //get emp firstname, lastname, website
-        String fname = (String) jogo.get("titulo");
-        String lname = (String) jogo.get("desenvolvedora");
-        String website = (String) jogo.get("publicadora");
+    private static void parseObj(JSONObject jogoEl) {
+        JSONParser jsonP = new JSONParser();
+
+        String fname = (String) jogoEl.get("titulo");
+        String lname = (String) jogoEl.get("desenvolvedora");
+        String website = (String) jogoEl.get("publicadora");
         System.out.println("First Name: " + fname);
         System.out.println("Last Name: " + lname);
         System.out.println("Website: " + website);
@@ -147,19 +148,42 @@ public class JogoController extends HttpServlet {
         switch (request.getServletPath()) {
 
             case "/jogo/create": {
-                String jsonname = request.getParameter("fileName");
+
                 JSONParser jsonP = new JSONParser();
-                try (FileReader reader = new FileReader("Users\\Guto\\IdeaProjects\\bd2021\\Scrapy\\teste\\spiders\\" + jsonname)) {
-                    //Read JSON File            /Users/Shared/crunchify.json
+
+//                try {
+//                    File myObj = new File("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json");
+//                    // C:\Users\yoshi\Documents\drip_games\bd2021\src\main\java\controller\geral-17-01.json
+//                    Scanner myReader = new Scanner(myObj,"utf-8");
+//                    String str = new String();
+//                    while (myReader.hasNextLine()) {
+//
+//                        //JSONArray array = new JSONArray(myReader.nextLine());
+//                        //str += myReader.nextLine();
+//                    }
+//                    System.out.println("An error occurred.");
+//                    myReader.close();
+//
+//                    JSONObject obj = new JSONObject(str);
+//
+//                } catch (FileNotFoundException e) {
+//                    System.out.println("An error occurred.");
+//                    e.printStackTrace();
+//                }
+
+//                String jsonName = request.getParameter("fileName");
+////                String test = "bd2021/src/main/java/controller/" + jsonName;
+//                JSONParser jsonP = new JSONParser();
+////                Path path2 = Paths.get(test);
+////                System.out.println("\n[Path] : " + path2);
+//
+                try {
+                    FileReader reader = new FileReader("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json", StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
                     JSONArray jogoList = (JSONArray) obj;
                     System.out.println(jogoList);
+                    jogoList.forEach(jogoEl -> parseObj((JSONObject) jogoEl));
 
-                    Iterator<JSONObject> iterator = jogoList.iterator();
-                    44
-                    while (iterator.hasNext()) {
-                        parseObj(iterator.next());
-                    }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -171,6 +195,7 @@ public class JogoController extends HttpServlet {
 
         }
     }
+
 
     /**
      * Returns a short description of the servlet.
