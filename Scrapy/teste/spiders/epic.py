@@ -39,11 +39,11 @@ class EpicCrawlSpider(Spider):
 
     def parse(self, response):
         item = myPrice()
-        item['titulo'] =  response.css('.css-1p6kk8h::text').extract() or response.css('.css-j00jcq::text').extract()
-        item['preco'] = (response.xpath('//div[@class="css-l24hbj"]/span[@class="css-1yqcr93"]/text()').extract()
-            or response.css('.css-l24hbj > .css-z3vg5b::text').extract()
+        item['titulo'] =  response.css('.css-1p6kk8h::text').extract_first() or response.css('.css-j00jcq::text').extract_first()
+        item['preco'] = (response.xpath('//div[@class="css-l24hbj"]/span[@class="css-1yqcr93"]/text()').extract_first()
+            or response.css('.css-l24hbj > .css-z3vg5b::text').extract_first()
         )
-        item['preco_sem_desconto'] = response.xpath('//span[@class="css-11ksoqt"]/div[@class="css-1rcj98u"]/text()').extract() or '0'
-        item['desconto'] = response.xpath('//div[@class="css-169q7x3"]/div[@class="css-fhxb3m"]/div[@class="css-l24hbj"]/span[@class="css-15fdr99"]/div/text()').extract() or response.xpath('//span[@class="css-15fdr99"]/div[@class="css-12j1mxw"]/text()').extract() or '0'
+        item['preco_sem_desconto'] = response.xpath('//span[@class="css-11ksoqt"]/div[@class="css-1rcj98u"]/text()').extract_first() or '0'
+        item['desconto'] = response.xpath('//div[@class="css-169q7x3"]/div[@class="css-fhxb3m"]/div[@class="css-l24hbj"]/span[@class="css-15fdr99"]/div/text()').extract_first() or response.xpath('//span[@class="css-15fdr99"]/div[@class="css-12j1mxw"]/text()').extract_first() or '0'
         #response.css('.css-15fdr99 > .css-12j1mxw::text').get()
         yield item

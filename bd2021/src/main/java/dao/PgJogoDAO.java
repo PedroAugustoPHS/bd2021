@@ -47,10 +47,6 @@ public class PgJogoDAO implements JogoDAO{
         this.connection = connection;
     }
 
-    public void escreveAlgo(){
-        System.out.println("joguinhos");
-    };
-
     @Override
     public void create(Jogo jogo) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {

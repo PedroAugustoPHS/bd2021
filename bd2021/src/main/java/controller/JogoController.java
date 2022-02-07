@@ -7,6 +7,7 @@ package controller;
 import dao.DAO;
 import dao.DAOFactory;
 import dao.JogoDAO;
+import dao.PgDAOFactory;
 import model.Jogo;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -119,16 +120,6 @@ public class JogoController extends HttpServlet {
 
     }
 
-    private static void parseObj(JSONObject jogoEl) {
-        JSONParser jsonP = new JSONParser();
-
-        String fname = (String) jogoEl.get("titulo");
-        String lname = (String) jogoEl.get("desenvolvedora");
-        String website = (String) jogoEl.get("publicadora");
-        System.out.println("First Name: " + fname);
-        System.out.println("Last Name: " + lname);
-        System.out.println("Website: " + website);
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -152,41 +143,22 @@ public class JogoController extends HttpServlet {
 
                 JSONParser jsonP = new JSONParser();
 
-//                try {
-//                    File myObj = new File("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json");
-//                    // C:\Users\yoshi\Documents\drip_games\bd2021\src\main\java\controller\geral-17-01.json
-//                    Scanner myReader = new Scanner(myObj,"utf-8");
-//                    String str = new String();
-//                    while (myReader.hasNextLine()) {
-//
-//                        //JSONArray array = new JSONArray(myReader.nextLine());
-//                        //str += myReader.nextLine();
-//                    }
-//                    System.out.println("An error occurred.");
-//                    myReader.close();
-//
-//                    JSONObject obj = new JSONObject(str);
-//
-//                } catch (FileNotFoundException e) {
-//                    System.out.println("An error occurred.");
-//                    e.printStackTrace();
-//                }
-
-//                String jsonName = request.getParameter("fileName");
-////                String test = "bd2021/src/main/java/controller/" + jsonName;
-//                JSONParser jsonP = new JSONParser();
-////                Path path2 = Paths.get(test);
-////                System.out.println("\n[Path] : " + path2);
-//
                 try {
                     String jsonName = request.getParameter("fileName");
                     FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     //FileReader reader = new FileReader("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json", StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
                     JSONArray jogoList = (JSONArray) obj;
-                    System.out.println(jogoList);
-                    jogoList.forEach(jogoEl -> parseObj((JSONObject) jogoEl));
-
+                    jogoList.forEach(jogoEl -> {
+                        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                            dao = daoFactory.getJogoDAO();
+                            dao.create(parseObj((JSONObject) jogoEl,jogo));
+                        } catch (SQLException | ClassNotFoundException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    
+                    
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -197,6 +169,38 @@ public class JogoController extends HttpServlet {
             }
 
         }
+    }
+
+    private static Jogo parseObj(JSONObject jogoEl, Jogo jogo) {
+        JSONParser jsonP = new JSONParser();
+        
+        String title = (String) jogoEl.get("titulo");
+        jogo.setTitulo(title);
+        String developer = (String) jogoEl.get("desenvolvedora");
+        jogo.setDesenvolvedora(developer);
+        String category = (String) jogoEl.get("categoria");
+        jogo.setCategoria(category);
+        String description = (String) jogoEl.get("descricao");
+        jogo.setDescricao(description);
+        String publisher = (String) jogoEl.get("publicadora");
+        jogo.setPublicadora(publisher);
+        String ano = (String) jogoEl.get("ano_publicacao");
+        jogo.setAno_publicacao(ano);
+        String cpu = (String) jogoEl.get("cpu");
+        jogo.setCpu(cpu);
+        String gpu = (String) jogoEl.get("gpu");
+        jogo.setGpu(gpu);
+        String ram = (String) jogoEl.get("memoria_ram");
+        jogo.setMemoria_ram(ram);
+        String so = (String) jogoEl.get("so");
+        jogo.setSo(so);
+        String armazenamento = (String) jogoEl.get("armazenamento");
+        jogo.setArmazenamento(armazenamento);
+        String image = (String) jogoEl.get("image");
+        jogo.setImage(image);
+        
+        return jogo;
+
     }
 
 
