@@ -65,9 +65,9 @@ class SteamCrawlSpider(Spider):
             )
         else:
             item = myPrice()
-            item['titulo'] = response.xpath('//div[@id="appHubAppName"]/text()').extract()
-            item['preco'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_final_price"]/text()').extract() or response.xpath('//div[@class="game_purchase_price price"]/text()').extract_first().strip()
-            item['preco_sem_desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_original_price"]/text()').extract() or "0"
-            item['desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_pct"]/text()').extract() or "0"
+            item['titulo'] = response.xpath('//div[@id="appHubAppName"]/text()').extract_first()
+            item['preco'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_final_price"]/text()').extract_first() or response.xpath('//div[@class="game_purchase_price price"]/text()').extract_first().strip()
+            item['preco_sem_desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_prices"]/div[@class="discount_original_price"]/text()').extract_first() or "0"
+            item['desconto'] = response.xpath('//div[@class="discount_block game_purchase_discount"]/div[@class="discount_pct"]/text()').extract_first() or "0"
 
             yield item

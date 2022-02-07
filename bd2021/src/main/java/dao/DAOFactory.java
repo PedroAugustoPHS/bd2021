@@ -85,7 +85,10 @@ public abstract class DAOFactory implements AutoCloseable {
 
     public abstract JogoDAO getJogoDAO();
     public abstract LojaDAO getLojaDAO();
-//    public abstract PrecoDataDAO getPrecoDataDAO();
+
+    public abstract PrecoDataDAO getPrecoDataDAO();
+
+    public abstract HistoricoDAO getHistoricoDAO();
 
     @Override
     public void close() throws SQLException {

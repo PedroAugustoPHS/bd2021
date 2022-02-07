@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.DAO;
 import dao.DAOFactory;
 import dao.JogoDAO;
 import model.Jogo;
@@ -138,9 +139,9 @@ public class JogoController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        JogoDAO dao;
+        DAO<Jogo> dao ;
         Jogo jogo = new Jogo();
 
         String servletPath = request.getServletPath();
@@ -178,7 +179,9 @@ public class JogoController extends HttpServlet {
 ////                System.out.println("\n[Path] : " + path2);
 //
                 try {
-                    FileReader reader = new FileReader("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json", StandardCharsets.UTF_8);
+                    String jsonName = request.getParameter("fileName");
+                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json", StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
                     JSONArray jogoList = (JSONArray) obj;
                     System.out.println(jogoList);

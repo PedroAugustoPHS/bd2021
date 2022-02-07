@@ -26,8 +26,11 @@ public class PgDAOFactory extends DAOFactory {
 
     @Override
     public LojaDAO getLojaDAO() { return new PgLojaDAO(this.connection); }
-//
-//    @Override
-//    public PrecoDataDAO getPrecoDataDAO() { return new PgPrecoDataDAO(this.connection); }
+
+    @Override
+    public PrecoDataDAO getPrecoDataDAO() { return new PgPrecoDataDAO(this.connection); }
+
+    @Override
+    public HistoricoDAO getHistoricoDAO() { return new PgHistoricoDAO(this.connection); }
     
 }

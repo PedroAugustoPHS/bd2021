@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: Guto
-Build-Jdk: version 17.0.1
+Built-By: Aline Makino
+Build-Jdk: Oracle OpenJDK version 17.0.1
 
