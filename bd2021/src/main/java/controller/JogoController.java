@@ -7,7 +7,6 @@ package controller;
 import dao.DAO;
 import dao.DAOFactory;
 import dao.JogoDAO;
-import dao.PgDAOFactory;
 import model.Jogo;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -172,6 +171,7 @@ public class JogoController extends HttpServlet {
 
             case "/jogo/create": {
 
+                RequestDispatcher dispatcher;
                 JSONParser jsonP = new JSONParser();
 
                 try {
@@ -179,6 +179,7 @@ public class JogoController extends HttpServlet {
                     //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
+
                     JSONArray jogoList = (JSONArray) obj;
 
                     try (DAOFactory daoFactory = DAOFactory.getInstance()) {
@@ -200,6 +201,8 @@ public class JogoController extends HttpServlet {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+
+                response.sendRedirect(request.getContextPath());
             }
 
         }
