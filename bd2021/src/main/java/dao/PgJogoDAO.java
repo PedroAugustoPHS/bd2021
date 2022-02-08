@@ -1,5 +1,7 @@
 package dao;
 
+import model.Jogo;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,15 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Jogo;
 
 public class PgJogoDAO implements JogoDAO{
 
     private final Connection connection;
 
     private static final String CREATE_QUERY =
-            "INSERT INTO bd2021.jogo(titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao " +
-                    "cpu, gpu, memoria_ram, so, armazenamento, image) " +
+            "INSERT INTO bd2021.jogo(titulo, desenvolvedora, categoria, descricao, publicadora, ano_publicacao, cpu, gpu, memoria_ram, so, armazenamento, image) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private static final String READ_QUERY =

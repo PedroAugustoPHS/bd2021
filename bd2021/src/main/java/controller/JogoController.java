@@ -121,59 +121,8 @@ public class JogoController extends HttpServlet {
     }
 
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request  servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        DAO<Jogo> dao ;
-        Jogo jogo = new Jogo();
-
-        String servletPath = request.getServletPath();
-
-        switch (request.getServletPath()) {
-
-            case "/jogo/create": {
-
-                JSONParser jsonP = new JSONParser();
-
-                try {
-                    String jsonName = request.getParameter("fileName");
-                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    //FileReader reader = new FileReader("C:\\Users\\Guto\\IdeaProjects\\bd2021\\bd2021\\src\\main\\java\\controller\\geral-17-01.json", StandardCharsets.UTF_8);
-                    Object obj = jsonP.parse(reader);
-                    JSONArray jogoList = (JSONArray) obj;
-                    jogoList.forEach(jogoEl -> {
-                        try (DAOFactory daoFactory = DAOFactory.getInstance()) {
-                            dao = daoFactory.getJogoDAO();
-                            dao.create(parseObj((JSONObject) jogoEl,jogo));
-                        } catch (SQLException | ClassNotFoundException | IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    
-                    
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-    }
-
     private static Jogo parseObj(JSONObject jogoEl, Jogo jogo) {
-        JSONParser jsonP = new JSONParser();
-        
+
         String title = (String) jogoEl.get("titulo");
         jogo.setTitulo(title);
         String developer = (String) jogoEl.get("desenvolvedora");
@@ -196,11 +145,64 @@ public class JogoController extends HttpServlet {
         jogo.setSo(so);
         String armazenamento = (String) jogoEl.get("armazenamento");
         jogo.setArmazenamento(armazenamento);
-        String image = (String) jogoEl.get("image");
+        String image = (String) jogoEl.get("img_src");
         jogo.setImage(image);
-        
+
         return jogo;
 
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request  servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        DAO<Jogo> dao;
+        Jogo jogo = new Jogo();
+
+        String servletPath = request.getServletPath();
+
+        switch (request.getServletPath()) {
+
+            case "/jogo/create": {
+
+                JSONParser jsonP = new JSONParser();
+
+                try {
+                    String jsonName = request.getParameter("fileName");
+                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    Object obj = jsonP.parse(reader);
+                    JSONArray jogoList = (JSONArray) obj;
+
+                    try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                        dao = daoFactory.getJogoDAO();
+                        jogoList.forEach(jogoEl -> {
+                            try {
+                                dao.create(parseObj((JSONObject) jogoEl, jogo));
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    } catch (SQLException | ClassNotFoundException | IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
 
 

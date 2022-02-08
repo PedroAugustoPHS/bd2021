@@ -27,7 +27,6 @@ CREATE TABLE bd2021.jogo(
 	CONSTRAINT pk_jogo PRIMARY KEY(id)
 );
 
-
 CREATE TABLE bd2021.preco_data(
 	data_registro DATE,
 	preco NUMERIC(6,2),
