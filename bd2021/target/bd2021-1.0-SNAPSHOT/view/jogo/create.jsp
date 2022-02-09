@@ -8,21 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="/view/include/head.jsp"  %>
+    <%@include file="/view/include/head.jsp" %>
     <title>Upload de arquivo</title>
 </head>
 <body>
-    <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
-        <form class="form-jogo-create" onsubmit="return showAlert();" action="${pageContext.servletContext.contextPath}/jogo/create" method="POST">
-            <h2 class="form-jogo-create-heading">Digite o nome arquivo para inserir os jogos</h2>
-            <div class="row">
-                <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="fileName" placeholder="Nome do arquivo.json" required autofocus>
-                <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Inserir</button>
-            </div>
-        </form>
-    </div>
+<div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
+    <form class="form-jogo-create" onsubmit="return showAlert();"
+          action="${pageContext.servletContext.contextPath}/jogo/create" method="POST">
+        <h2 class="form-jogo-create-heading">Digite o nome arquivo para inserir os jogos</h2>
+        <div class="row">
+            <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="fileName"
+                   placeholder="Nome do arquivo.json" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Inserir</button>
+        </div>
+    </form>
+</div>
 
-    <%@include file="/view/include/scripts.jsp"%>
-    <script src="${pageContext.servletContext.contextPath}/assets/js/popup.js"></script>
+<%@include file="/view/include/scripts.jsp" %>
+<script src="${pageContext.servletContext.contextPath}/assets/js/popup.js"></script>
 </body>
 </html>

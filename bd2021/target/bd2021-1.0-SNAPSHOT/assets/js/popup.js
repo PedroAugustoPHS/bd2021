@@ -1,4 +1,4 @@
-function showAlert(){
+function showAlert() {
 
     alert("Jogos inseridos com sucesso");
 }
