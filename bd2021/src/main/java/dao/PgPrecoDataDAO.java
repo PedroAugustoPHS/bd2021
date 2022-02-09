@@ -1,11 +1,12 @@
 package dao;
 
+import model.PrecoData;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.PrecoData;
 
 
 public class PgPrecoDataDAO implements PrecoDataDAO{
@@ -13,35 +14,32 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     private final Connection connection;
 
     private static final String CREATE_QUERY =
-            "INSERT INTO public.preco_data(data_registro, preco, porcentagem_promo, jogo_id, loja_id) " +
+            "INSERT INTO bd2021.preco_data(data_registro, preco, porcentagem_promo, jogo_id, loja_id) " +
                     "VALUES(?, ?, ?, ?, ?);";
 
     private static final String READ_QUERY =
             "SELECT data_registro, preco, porcentagem_promo " +
-                    "FROM public.preco_data " +
+                    "FROM bd2021.preco_data " +
                     "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
 
     private static final String UPDATE_QUERY =
-            "UPDATE public.preco_data " +
+            "UPDATE bd2021.preco_data " +
                     "SET preco = ?, porcentagem_promo = ? " +
                     "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
 
     private static final String DELETE_QUERY =
-            "DELETE FROM public.preco_data " +
+            "DELETE FROM bd2021.preco_data " +
                     "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
 
     private static final String ALL_QUERY =
             "SELECT data_registro, preco, porcentagem_promo, jogo_id, loja_id " +
-                    "FROM public.preco_data " +
+                    "FROM bd2021.preco_data " +
                     "ORDER BY data_registro;";
 
     public PgPrecoDataDAO(Connection connection) {
         this.connection = connection;
     }
 
-    public void escreveAlgo(){
-        System.out.println("precinhos");
-    };
 
     @Override
     public void create(PrecoData preco_data) throws SQLException {

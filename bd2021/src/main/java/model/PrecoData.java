@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class PrecoData {
     private Date data_registro;
-    private Integer preco;
+    private Float preco;
     private Integer porcentagem_promo;
     private Integer jogo_id;
     private Integer loja_id;
@@ -17,11 +17,11 @@ public class PrecoData {
         this.data_registro = data_registro;
     }
 
-    public Integer getPreco() {
+    public Float getPreco() {
         return preco;
     }
 
-    public void setPreco(Integer preco) {
+    public void setPreco(Float preco) {
         this.preco = preco;
     }
 

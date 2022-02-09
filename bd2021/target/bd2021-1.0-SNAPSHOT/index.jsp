@@ -47,7 +47,7 @@
             </button>
 
             <button class="btn btn-lg btn-primary btn-block" type="button">
-                <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/preco/create">
+                <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/preco/create" methods="GET">
                     Fazer uma nova leitura de preços
                 </a>
             </button>
