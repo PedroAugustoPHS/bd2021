@@ -54,9 +54,9 @@ CREATE TABLE bd2021.historico(
 );
 
 
+-- INSERT INTO bd2021.loja VALUES (DEFAULT,'epicgames','https://www.epicgames.com/store/pt-BR/','assets/images/logos/epicgames_logo.png');
 -- INSERT INTO bd2021.loja VALUES (DEFAULT,'steam','https://store.steampowered.com/?l=portuguese','assets/images/logos/steam_logo.png');
 -- INSERT INTO bd2021.loja VALUES (DEFAULT,'nuuvem','https://www.nuuvem.com','assets/images/logos/nuuvem_logo.png');
--- INSERT INTO bd2021.loja VALUES (DEFAULT,'epicgames','https://www.epicgames.com/store/pt-BR/','assets/images/logos/epicgames_logo.png');
 
 -- INSERT INTO bd2021.jogo VALUES (DEFAULT,'Valheim','Iron Gate AB','aventura','joguinho legal','tantofaz', '2018-10-10','i7-1100', 'Ryzen 5 5600G', '4', 'ruimdows', '2');
 -- INSERT INTO bd2021.jogo VALUES (DEFAULT,'MUK','Iron Gate AB','aventura','joguinho legal','tantofaz','2018-10-10', 'i7-1100', 'Ryzen 5 5600G', '4', 'ruimdows', '2');

@@ -30,9 +30,10 @@ import java.sql.SQLException;
 
 public class PrecoDataController extends HttpServlet {
 
-    private static PrecoData parseObj(JSONObject precoEl, PrecoData price, Date filedate, String lojaname) {
+    private static PrecoData parseObj(JSONObject precoEl, PrecoData price, java.sql.Date filedate, String lojaname) {
 
-        Date data_reg = (Date) precoEl.get(filedate);
+
+        java.sql.Date data_reg = (java.sql.Date) filedate;
         price.setData_registro(data_reg);
 
         String spreco = (String) precoEl.get("preco");
@@ -50,14 +51,17 @@ public class PrecoDataController extends HttpServlet {
         price.setJogo_id(getId(jogoName));
 
         switch (lojaname) {
-            case "steam": {
+            case "epic": {
                 price.setLoja_id(1);
+                break;
+            }
+            case "steam": {
+                price.setLoja_id(2);
+                break;
             }
             case "nuuvem": {
-                price.setLoja_id(2);
-            }
-            case "epic": {
                 price.setLoja_id(3);
+                break;
             }
         }
 
@@ -115,7 +119,7 @@ public class PrecoDataController extends HttpServlet {
             return (23);
         } else if (jogoname.indexOf("SUPERHOT") != -1) {
             return (24);
-        } else if (jogoname == "Far Cry" || jogoname == "Far Cry 1" || jogoname == "Far Cry®") {
+        } else if (jogoname.equals("Far Cry") || jogoname.equals("Far Cry 1") || jogoname.equals("Far Cry®")) {
             return (25);
         } else if ((jogoname.indexOf("Far Cry") != -1 || jogoname.indexOf("FAR") != -1) && jogoname.indexOf("3") != -1) {
             return (26);
@@ -161,32 +165,30 @@ public class PrecoDataController extends HttpServlet {
 
             case "/preco/create": {
                 JSONParser jsonP = new JSONParser();
-                Date filedata;
+                java.sql.Date filedate;
                 String lojaname;
                 String mes, mes2;
 
                 try {
                     String jsonName = request.getParameter("fileName");
-                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
 
                     mes2 = jsonName.split("-")[2];
                     mes = mes2.split("\\.j")[0];
 
                     lojaname = jsonName.split("-")[0];
-                    filedata = Date.valueOf(("2022" + "-" + mes + "-" + (jsonName.split("-")[1])));
-                    System.out.println("data:" + filedata);
+                    filedate = Date.valueOf(("2022" + "-" + mes + "-" + (jsonName.split("-")[1])));
 
                     JSONArray precoList = (JSONArray) obj;
 
                     try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                         dao = daoFactory.getPrecoDataDAO();
-                        Date finalFiledata = filedata;
 
                         precoList.forEach(precoEl -> {
                             try {
-                                dao.create(parseObj((JSONObject) precoEl, precoData, finalFiledata, lojaname));
+                                dao.create(parseObj((JSONObject) precoEl, precoData, filedate, lojaname));
 
                             } catch (SQLException e) {
                                 e.printStackTrace();
