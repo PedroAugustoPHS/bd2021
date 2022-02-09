@@ -3,6 +3,10 @@ package controller;
 import dao.DAOFactory;
 import dao.PrecoDataDAO;
 import model.PrecoData;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +24,7 @@ import java.sql.SQLException;
 @WebServlet(
         name = "PrecoDataController",
         urlPatterns = {
-                "/preco",
+                "/preco/create",
         }
 )
 

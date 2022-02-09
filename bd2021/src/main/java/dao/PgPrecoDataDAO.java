@@ -45,7 +45,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     public void create(PrecoData preco_data) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_QUERY)) {
             statement.setDate(1, preco_data.getData_registro());
-            statement.setInt(2, preco_data.getPreco());
+            statement.setFloat(2, preco_data.getPreco());
             statement.setInt(3, preco_data.getPorcentagem_promo());
             statement.setInt(4, preco_data.getJogo_id());
             statement.setInt(5, preco_data.getLoja_id());
@@ -73,7 +73,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
                     preco_data.setData_registro(result.getDate("data_registro"));
-                    preco_data.setPreco(result.getInt("preco"));
+                    preco_data.setPreco(result.getFloat("preco"));
                     preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
                 } else {
                     throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
@@ -89,7 +89,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
         query = UPDATE_QUERY;
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, preco_data.getPreco());
+            statement.setFloat(1, preco_data.getPreco());
             statement.setInt(2, preco_data.getPorcentagem_promo());
 
             if (statement.executeUpdate() < 1) {
@@ -132,7 +132,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
             while (result.next()) {
                 PrecoData preco_data = new PrecoData();
                 preco_data.setData_registro(result.getDate("data_registro"));
-                preco_data.setPreco(result.getInt("preco"));
+                preco_data.setPreco(result.getFloat("preco"));
                 preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
                 preco_data.setJogo_id(result.getInt("jogo_id"));
                 preco_data.setLoja_id(result.getInt("loja_id"));
