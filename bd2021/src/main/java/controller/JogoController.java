@@ -160,18 +160,16 @@ public class JogoController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         DAO<Jogo> dao;
         Jogo jogo = new Jogo();
 
-        String servletPath = request.getServletPath();
 
         switch (request.getServletPath()) {
 
             case "/jogo/create": {
 
-                RequestDispatcher dispatcher;
                 JSONParser jsonP = new JSONParser();
 
                 try {

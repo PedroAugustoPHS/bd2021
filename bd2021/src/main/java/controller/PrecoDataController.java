@@ -33,7 +33,7 @@ public class PrecoDataController extends HttpServlet {
     private static PrecoData parseObj(JSONObject precoEl, PrecoData price, java.sql.Date filedate, String lojaname) {
 
 
-        java.sql.Date data_reg = (java.sql.Date) filedate;
+        java.sql.Date data_reg = filedate;
         price.setData_registro(data_reg);
 
         String spreco = (String) precoEl.get("preco");
@@ -139,8 +139,6 @@ public class PrecoDataController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        PrecoDataDAO dao;
-        PrecoData precoData;
         RequestDispatcher dispatcher;
 
         switch (request.getServletPath()) {
@@ -159,7 +157,6 @@ public class PrecoDataController extends HttpServlet {
         PrecoDataDAO dao;
         PrecoData precoData = new PrecoData();
 
-        String servletPath = request.getServletPath();
 
         switch (request.getServletPath()) {
 

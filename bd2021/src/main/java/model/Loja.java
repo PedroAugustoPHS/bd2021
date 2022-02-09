@@ -1,5 +1,4 @@
 package model;
-import java.sql.Date;
 
 public class Loja {
     private Integer id;

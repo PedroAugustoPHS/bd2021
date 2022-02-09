@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 
 public class Jogo {
     private Integer id;

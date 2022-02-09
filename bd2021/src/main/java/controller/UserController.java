@@ -11,7 +11,6 @@ import dao.DAOFactory;
 import dao.UserDAO;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -34,7 +33,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-//import static sun.font.CreatedFontTracker.MAX_FILE_SIZE;
 
 /**
  *
@@ -157,7 +155,7 @@ public class UserController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
         
         DAO<User> dao;
         User user = new User();

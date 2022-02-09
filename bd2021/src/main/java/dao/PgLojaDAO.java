@@ -41,9 +41,6 @@ public class PgLojaDAO implements LojaDAO{
         this.connection = connection;
     }
 
-    public void escreveAlgo(){
-        System.out.println("lojinhas");
-    };
 
     @Override
     public void create(Loja loja) throws SQLException {

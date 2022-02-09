@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,9 +41,6 @@ public class PgHistoricoDAO implements HistoricoDAO{
             this.connection = connection;
         }
 
-        public void escreveAlgo(){
-            System.out.println("historico");
-        };
 
     @Override
     public void create(Historico historico) throws SQLException {
@@ -114,7 +110,7 @@ public class PgHistoricoDAO implements HistoricoDAO{
 
     @Override
     public void delete(Integer id) throws SQLException {
-        return;
+
     }
 
     @Override

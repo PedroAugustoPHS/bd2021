@@ -13,7 +13,7 @@ import model.User;
  */
 public interface UserDAO extends DAO<User> {
 
-    public void authenticate(User usuario) throws SQLException, SecurityException;
-    public User getByLogin(String login) throws SQLException;
+    void authenticate(User usuario) throws SQLException, SecurityException;
+    User getByLogin(String login) throws SQLException;
     
 }
