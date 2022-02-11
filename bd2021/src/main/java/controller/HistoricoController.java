@@ -1,9 +1,7 @@
 package controller;
 
-import dao.DAOFactory;
 import dao.HistoricoDAO;
 import model.Historico;
-
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +14,7 @@ import java.io.IOException;
 @WebServlet(
         name = "HistoricoController",
         urlPatterns = {
-                "/hist",
+                "/load-hist",
         }
 )
 
@@ -26,14 +24,14 @@ public class HistoricoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HistoricoDAO dao;
-        Historico historio;
+        Historico historico;
         RequestDispatcher dispatcher;
 
         switch (request.getServletPath()) {
-            case "/hist": {
+            case "/load-hist": {
 
             }
-            }
+        }
     }
 
     @Override
@@ -46,7 +44,7 @@ public class HistoricoController extends HttpServlet {
 
         switch (request.getServletPath()) {
 
-            case "/hist": {
+            case "/load-hist": {
             }
         }
     }
