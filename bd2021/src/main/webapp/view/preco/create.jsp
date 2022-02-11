@@ -22,6 +22,14 @@
             <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Inserir</button>
         </div>
     </form>
+    <br>
+    <br>
+
+    <form action="/preco/load" method="POST">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Carregar dados de histórico
+        </button>
+    </form>
 </div>
 
 <%@include file="/view/include/scripts.jsp" %>

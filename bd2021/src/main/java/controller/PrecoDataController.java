@@ -148,6 +148,11 @@ public class PrecoDataController extends HttpServlet {
                 break;
 
             }
+            case "/preco/load-hist": {
+                dispatcher = request.getRequestDispatcher("/view/preco/load-hist.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
         }
     }
 
@@ -156,7 +161,6 @@ public class PrecoDataController extends HttpServlet {
 
         PrecoDataDAO dao;
         PrecoData precoData = new PrecoData();
-
 
         switch (request.getServletPath()) {
 
@@ -168,8 +172,8 @@ public class PrecoDataController extends HttpServlet {
 
                 try {
                     String jsonName = request.getParameter("fileName");
-                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    //FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
 
                     mes2 = jsonName.split("-")[2];
@@ -183,9 +187,10 @@ public class PrecoDataController extends HttpServlet {
                     try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                         dao = daoFactory.getPrecoDataDAO();
 
+                        PrecoDataDAO finalDao = dao;
                         precoList.forEach(precoEl -> {
                             try {
-                                dao.create(parseObj((JSONObject) precoEl, precoData, filedate, lojaname));
+                                finalDao.create(parseObj((JSONObject) precoEl, precoData, filedate, lojaname));
 
                             } catch (SQLException e) {
                                 e.printStackTrace();
@@ -203,7 +208,29 @@ public class PrecoDataController extends HttpServlet {
                 }
 
                 try {
-                    response.sendRedirect(request.getContextPath());
+                    response.sendRedirect(request.getContextPath() + "/preco/create");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            case "/preco/load": {
+                System.out.println("tatu");
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getPrecoDataDAO();
+                    try {
+                        dao.loadHist();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    response.sendRedirect(request.getContextPath() + "/preco/create");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

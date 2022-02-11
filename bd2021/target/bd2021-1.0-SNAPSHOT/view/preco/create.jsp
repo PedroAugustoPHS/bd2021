@@ -5,7 +5,7 @@
   Time: 09:17
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <%@include file="/view/include/head.jsp" %>
@@ -21,6 +21,14 @@
                    placeholder="Nome do arquivo.json" required autofocus>
             <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Inserir</button>
         </div>
+    </form>
+    <br>
+    <br>
+
+    <form action ="/preco/load" method="POST">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                Carregar dados de histórico
+        </button>
     </form>
 </div>
 
