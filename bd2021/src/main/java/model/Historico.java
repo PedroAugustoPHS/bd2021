@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Historico {
     private Date data_menor_preco;
-    private Integer menor_preco;
-    private Integer media_preco;
+    private Float menor_preco;
+    private Float media_preco;
     private Integer maior_promo;
     private Integer jogo_id;
     private Integer loja_id;
@@ -18,19 +18,19 @@ public class Historico {
         this.data_menor_preco = data_menor_preco;
     }
 
-    public Integer getMenor_preco() {
+    public Float getMenor_preco() {
         return menor_preco;
     }
 
-    public void setMenor_preco(Integer menor_preco) {
+    public void setMenor_preco(Float menor_preco) {
         this.menor_preco = menor_preco;
     }
 
-    public Integer getMedia_preco() {
+    public Float getMedia_preco() {
         return media_preco;
     }
 
-    public void setMedia_preco(Integer media_preco) {
+    public void setMedia_preco(Float media_preco) {
         this.media_preco = media_preco;
     }
 

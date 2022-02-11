@@ -2,6 +2,7 @@ package dao;
 
 import model.PrecoData;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 
