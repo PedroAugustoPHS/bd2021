@@ -5,10 +5,10 @@
   Time: 09:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <%@include file="/view/include/head.jsp"  %>
+    <%@include file="/view/include/head.jsp" %>
     <title>Drip ${jogo.titulo}</title>
 </head>
 <body>
@@ -17,7 +17,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-6" style="display: flex;flex-direction: column;justify-content: center;align-items: center; height: 15rem; background: black; padding: 25px;">
+                    <div class="col-6"
+                         style="display: flex;flex-direction: column;justify-content: center;align-items: center; height: 15rem; background: black; padding: 25px;">
                         <img class="col-12" src="${jogo.image}"/>
                     </div>
                     <div class="col-6">

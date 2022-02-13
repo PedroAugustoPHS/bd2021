@@ -4,13 +4,13 @@
     Author     : dskaster
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <%@include file="/view/include/head.jsp"  %>
+    <%@include file="/view/include/head.jsp" %>
     <title>Jogo: atualização</title>
 </head>
 <body>
@@ -23,42 +23,48 @@
 
         <div class="form-group">
             <label class="control-label" for="title">Titulo</label>
-            <input id="title" class="form-control" type="text" name="title" value="${jogo.titulo}" data-value="${jogo.titulo}" required autofocus/>
+            <input id="title" class="form-control" type="text" name="title" value="${jogo.titulo}"
+                   data-value="${jogo.titulo}" required autofocus/>
 
             <p class="help-block"></p>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="developer">Desenvolvedora</label>
-            <input id="developer" class="form-control" type="text" name="developer" value="${jogo.desenvolvedora}" data-value="${jogo.desenvolvedora}" required/>
+            <input id="developer" class="form-control" type="text" name="developer" value="${jogo.desenvolvedora}"
+                   data-value="${jogo.desenvolvedora}" required/>
 
             <p class="help-block"></p>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="category">Categoria</label>
-            <input id="category" class="form-control" type="text" name="category" value="${jogo.categoria}" data-value="${jogo.categoria}" required/>
+            <input id="category" class="form-control" type="text" name="category" value="${jogo.categoria}"
+                   data-value="${jogo.categoria}" required/>
 
             <p class="help-block"></p>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="description">Descricao</label>
-            <input id="description" class="form-control" type="text" name="description" value="${jogo.descricao}" data-value="${jogo.descricao}" required/>
+            <input id="description" class="form-control" type="text" name="description" value="${jogo.descricao}"
+                   data-value="${jogo.descricao}" required/>
 
             <p class="help-block"></p>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="publisher">Publicadora</label>
-            <input id="publisher" class="form-control" type="text" name="publisher" value="${jogo.publicadora}" data-value="${jogo.publicadora}" required/>
+            <input id="publisher" class="form-control" type="text" name="publisher" value="${jogo.publicadora}"
+                   data-value="${jogo.publicadora}" required/>
 
             <p class="help-block"></p>
         </div>
 
         <div class="form-group">
             <label class="control-label" for="date_publi">Ano de publicacao</label>
-            <input id="date_publi" class="form-control" type="text" name="date_publi" value="${jogo.ano_publicacao}" data-value="${jogo.ano_publicacao}" required/>
+            <input id="date_publi" class="form-control" type="text" name="date_publi" value="${jogo.ano_publicacao}"
+                   data-value="${jogo.ano_publicacao}" required/>
 
             <p class="help-block"></p>
         </div>
@@ -84,7 +90,8 @@
 
         <div class="form-group">
             <label for="jogo-memoria_ram" class="control-label">Memória RAM</label>
-            <input id="jogo-memoria_ram" class="form-control" type="text" name="memoria_ram" value="${jogo.memoria_ram}" required/>
+            <input id="jogo-memoria_ram" class="form-control" type="text" name="memoria_ram" value="${jogo.memoria_ram}"
+                   required/>
         </div>
 
         <div class="form-group">
@@ -94,7 +101,8 @@
 
         <div class="form-group">
             <label for="jogo-armazenamento" class="control-label">Armazenamento</label>
-            <input id="jogo-armazenamento" class="form-control" type="text" name="armazenamento" value="${jogo.armazenamento}" required/>
+            <input id="jogo-armazenamento" class="form-control" type="text" name="armazenamento"
+                   value="${jogo.armazenamento}" required/>
         </div>
 
         <div class="text-center">
@@ -103,7 +111,7 @@
     </form>
 </div>
 
-<%@include file="/view/include/scripts.jsp"%>
+<%@include file="/view/include/scripts.jsp" %>
 <script src="${pageContext.servletContext.contextPath}/assets/js/user.js"></script>
 </body>
 </html>

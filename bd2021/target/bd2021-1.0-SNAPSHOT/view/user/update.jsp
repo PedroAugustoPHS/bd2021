@@ -27,7 +27,8 @@
 
                 <div class="form-group">
                     <label class="control-label" for="usuario-login">Login</label>
-                    <input id="usuario-login" class="form-control" type="text" name="login" value="${user.login}" data-value="${user.login}" required autofocus/>
+                    <input id="usuario-login" class="form-control" type="text" name="login" value="${user.login}"
+                           data-value="${user.login}" required autofocus/>
 
                     <p class="help-block"></p>
                 </div>
