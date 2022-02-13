@@ -22,35 +22,35 @@
                 action="${pageContext.servletContext.contextPath}/user/update"
                 enctype="multipart/form-data"
                 method="POST">
-                
+
                 <input type="hidden" name="id" value="${user.id}">
 
                 <div class="form-group">
                     <label class="control-label" for="usuario-login">Login</label>
-                    <input id="usuario-login" class="form-control" type="text" name="login" value="${user.login}" data-value="${user.login}" required autofocus/>
+                    <input id="usuario-login" class="form-control" type="text" name="login" value="${user.login}"
+                           data-value="${user.login}" required autofocus/>
 
                     <p class="help-block"></p>
                 </div>
 
 
-                <div class="form-group">
-                    <label class="control-label">Senha</label>
-                    <input class="form-control password-input"
-                           type="password" name="senha"
-                           pattern=".{4,}" title="Pelo menos 4 caracteres."/>
-                </div>
+                <%--    private Integer id;--%>
+                <%--    private String titulo;--%>
+                <%--    private String desenvolvedora;--%>
+                <%--    private String categoria;--%>
+                <%--    private String descricao;--%>
+                <%--    private String publicadora;--%>
+                <%--    private String ano_publicacao;--%>
+                <%--    private String cpu;--%>
+                <%--    private String gpu;--%>
+                <%--    private String memoria_ram;--%>
+                <%--    private String so;--%>
+                <%--    private String armazenamento;--%>
+                <%--    private String image;--%>
 
-                <div class="form-group pwd-confirm">
-                    <label class="control-label">Confirmar senha</label>
-                    <input class="form-control password-confirm"
-                           type="password" name="senha-confirmacao"
-                           pattern=".{4,}" title="Pelo menos 4 caracteres."/>
-                    <p class="help-block"></p>
-                </div>
-
                 <div class="form-group">
-                    <label for="usuario-nome" class="control-label">Nome</label>
-                    <input id="usuario-nome" class="form-control" type="text" name="nome" value="${user.nome}" required/>
+                    <label for="jogo-cpu" class="control-label">Nome</label>
+                    <input id="jogo-cpu" class="form-control" type="text" name="nome" value="${user.nome}" required/>
                 </div>
 
 

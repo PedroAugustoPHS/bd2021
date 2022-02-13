@@ -80,7 +80,7 @@ public class JogoController extends HttpServlet {
                     jogo = dao.read(Integer.parseInt(request.getParameter("id")));
                     request.setAttribute("jogo", jogo);
 
-                    dispatcher = request.getRequestDispatcher("/view/user/update.jsp");
+                    dispatcher = request.getRequestDispatcher("/view/jogo/update.jsp");
                     dispatcher.forward(request, response);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
@@ -163,7 +163,9 @@ public class JogoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         DAO<Jogo> dao;
+        DAO<Jogo> dao2;
         Jogo jogo = new Jogo();
+        request.setCharacterEncoding("UTF-8");
 
 
         switch (request.getServletPath()) {
@@ -174,17 +176,17 @@ public class JogoController extends HttpServlet {
 
                 try {
                     String jsonName = request.getParameter("fileName");
-                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    //FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
 
                     JSONArray jogoList = (JSONArray) obj;
 
                     try (DAOFactory daoFactory = DAOFactory.getInstance()) {
-                        dao = daoFactory.getJogoDAO();
+                        dao2 = daoFactory.getJogoDAO();
                         jogoList.forEach(jogoEl -> {
                             try {
-                                dao.create(parseObj((JSONObject) jogoEl, jogo));
+                                dao2.create(parseObj((JSONObject) jogoEl, jogo));
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -203,6 +205,34 @@ public class JogoController extends HttpServlet {
                 response.sendRedirect(request.getContextPath());
             }
 
+            case "/jogo/update": {
+
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+
+                    jogo.setId(Integer.parseInt(request.getParameter("id")));
+                    jogo.setTitulo(request.getParameter("title"));
+                    jogo.setDesenvolvedora(request.getParameter("developer"));
+                    jogo.setCategoria(request.getParameter("category"));
+                    jogo.setDescricao(request.getParameter("description"));
+                    jogo.setPublicadora(request.getParameter("publisher"));
+                    jogo.setAno_publicacao(request.getParameter("date_publi"));
+                    jogo.setImage(request.getParameter("image"));
+                    jogo.setCpu(request.getParameter("cpu"));
+                    jogo.setGpu(request.getParameter("gpu"));
+                    jogo.setSo(request.getParameter("so"));
+                    jogo.setMemoria_ram(request.getParameter("memoria_ram"));
+                    jogo.setArmazenamento(request.getParameter("armazenamento"));
+
+                    dao.update(jogo);
+                    response.sendRedirect(request.getContextPath() + "/jogo");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
     }
 

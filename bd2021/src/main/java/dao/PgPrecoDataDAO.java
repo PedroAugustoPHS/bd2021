@@ -41,17 +41,29 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     private static final String MIN_PRICE_QUERY =
             "SELECT MIN(bd2021.preco_data.preco) " +
                     "FROM bd2021.preco_data " +
-                    "WHERE jogo_id = ? AND loja_id = ?";
+                    "WHERE jogo_id = ? AND loja_id = ?;";
 
     private static final String HIST_QUERY =
-            "SELECT bd2021.preco_data.data_registro,bd2021.preco_data.porcentagem_promo " +
+            "SELECT data_registro, porcentagem_promo " +
                     "FROM bd2021.preco_data " +
-                    "WHERE jogo_id = ? AND loja_id = ? AND preco = ?";
+                    "WHERE preco = ( " +
+                    "SELECT MIN(preco) " +
+                    "FROM bd2021.preco_data " +
+                    "WHERE jogo_id = ? AND loja_id = ? " +
+                    ")ORDER BY bd2021.preco_data.data_registro fetch first 1 rows only";
+
+//            "SELECT MIN(preco) AS minprice " +
+//                    "FROM bd2021.preco_data " +
+//                    "WHERE jogo_id = ? AND loja_id = ?;" +
+//            "SELECT data_registro, porcentagem_promo " +
+//                    "FROM bd2021.preco_data " +
+//                    "WHERE jogo_id = ? AND loja_id = ? AND minprice " +
+//                    "ORDER BY bd2021.preco_data.data_registro fetch first 1 rows only;";
 
     private static final String AVG_PRICE_QUERY =
             "SELECT AVG(bd2021.preco_data.preco) " +
                     "FROM bd2021.preco_data " +
-                    "WHERE jogo_id = ? AND loja_id = ?";
+                    "WHERE jogo_id = ? AND loja_id = ?;";
 
     public PgPrecoDataDAO(Connection connection) {
         this.connection = connection;
@@ -168,83 +180,109 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
 
         System.out.println("entrou");
         Integer jogo_id = 30;
-        Integer loja_id = 3;
-        Integer i, j;
+        Integer loja_id = 0;
+        Integer j;
         Float min_preco;
         Date data_reg;
         Integer promo;
         Float avg_price;
+        Historico hist = new Historico();
 
-        for (i = 0; i > loja_id; i++) {
-            for (j = 0; j > jogo_id; j++) {
-                try (PreparedStatement statement = connection.prepareStatement(MIN_PRICE_QUERY)) {
-                    statement.setInt(1, j);
-                    statement.setInt(2, i);
+        switch (filename) {
+            case "epic": {
+                loja_id = 1;
+                break;
+            }
+            case "steam": {
+                loja_id = 2;
+                break;
+            }
+            case "nuuvem": {
+                loja_id = 3;
+                break;
+            }
+        }
 
-                    try (ResultSet result = statement.executeQuery()) {
-                        if (result.next()) {
-                            min_preco = result.getFloat(1);
-                        } else {
-                            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
-                        }
+
+        for (j = 1; j <= jogo_id; j++) {
+            hist.setJogo_id(j);
+            hist.setLoja_id(loja_id);
+            try (PreparedStatement statement = connection.prepareStatement(MIN_PRICE_QUERY)) {
+                statement.setInt(1, j);
+                statement.setInt(2, loja_id);
+
+                try (ResultSet result = statement.executeQuery()) {
+                    if (result.next()) {
+                        min_preco = result.getFloat("minprice");
+                        hist.setMenor_preco(min_preco);
+                    } else {
+                        throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
                     }
                 } catch (SQLException ex) {
-                    throw new SQLException("Erro ao editar preco_data.");
+                    continue;
                 }
-                try (PreparedStatement statement = connection.prepareStatement(HIST_QUERY)) {
-                    statement.setInt(1, j);
-                    statement.setInt(2, i);
-                    statement.setFloat(3, min_preco);
+            } catch (SQLException ex) {
+                throw new SQLException("Erro ao editar preco_data.");
+            }
 
-                    try (ResultSet result = statement.executeQuery()) {
-                        if (result.next()) {
-                            data_reg = result.getDate("data_registro");
-                            promo = result.getInt("porcentagem_promo");
-
-                        } else {
-                            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
-                        }
+            try (PreparedStatement statement = connection.prepareStatement(HIST_QUERY)) {
+                statement.setInt(1, j);
+                statement.setInt(2, loja_id);
+                try (ResultSet result = statement.executeQuery()) {
+                    System.out.println("state:" + statement);
+                    if (result.next()) {
+                        System.out.println(result.getDate("data_registro"));
+                        System.out.println(result.getInt("porcentagem_promo"));
+                        data_reg = result.getDate("data_registro");
+                        promo = result.getInt("porcentagem_promo");
+                        hist.setData_menor_preco(data_reg);
+                        hist.setMaior_promo(promo);
+                    } else {
+                        System.out.println("tatu");
                     }
                 } catch (SQLException ex) {
-                    throw new SQLException("Erro ao editar preco_data.");
+                    System.out.println("deu ruim2");
+                    continue;
                 }
-                try (PreparedStatement statement = connection.prepareStatement(AVG_PRICE_QUERY)) {
-                    statement.setInt(1, j);
-                    statement.setInt(2, i);
+            } catch (SQLException ex) {
+                throw new SQLException("Erro ao editar preco_data.");
+            }
 
-                    try (ResultSet result = statement.executeQuery()) {
-                        if (result.next()) {
-                            avg_price = result.getFloat(1);
-                        } else {
-                            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
-                        }
+            try (PreparedStatement statement = connection.prepareStatement(AVG_PRICE_QUERY)) {
+                statement.setInt(1, j);
+                statement.setInt(2, loja_id);
+
+                try (ResultSet result = statement.executeQuery()) {
+                    if (result.next()) {
+                        avg_price = result.getFloat("avgprice");
+                        hist.setMedia_preco(avg_price);
+                    } else {
+                        throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
                     }
                 } catch (SQLException ex) {
-                    throw new SQLException("Erro ao editar preco_data.");
+                    System.out.println("deu ruim3");
+                    continue;
                 }
-                System.out.println("minprice:" + min_preco);
-                System.out.println("data_reg:" + data_reg);
-                System.out.println("promo:" + promo);
-                System.out.println("avg_price:" + avg_price);
+            } catch (SQLException ex) {
+                throw new SQLException("Erro ao editar preco_data.");
+            }
 
-                Historico hist = new Historico();
-                hist.setData_menor_preco(data_reg);
-                hist.setJogo_id(j);
-                hist.setLoja_id(i);
-                hist.setMenor_preco(min_preco);
-                hist.setMedia_preco(avg_price);
-                hist.setMaior_promo(promo);
-                HistoricoDAO dao;
-
-                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
-                    dao = daoFactory.getHistoricoDAO();
-                    try {
-                        dao.create(hist);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+            HistoricoDAO dao;
+            try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                dao = daoFactory.getHistoricoDAO();
+                try {
+                    dao.deleteHist(j, loja_id);
+                    System.out.println("Hist excluido");
+                } catch (SQLException e) {
+                    System.out.println("Historico não existia :p");
+                }
+                try {
+                    dao.create(hist);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
         }
+
     }
 }

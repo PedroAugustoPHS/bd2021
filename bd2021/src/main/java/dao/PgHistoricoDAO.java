@@ -138,6 +138,8 @@ public class PgHistoricoDAO implements HistoricoDAO{
 
             if (statement.executeUpdate() < 1) {
                 throw new SQLException("Erro ao excluir: histórico não encontrado.");
+            } else {
+                System.out.println("Entrou aqui?");
             }
         } catch (SQLException ex) {
             if (ex.getMessage().equals("Erro ao excluir: histórico não encontrado.")) {

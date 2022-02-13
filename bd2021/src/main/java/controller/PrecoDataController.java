@@ -196,6 +196,11 @@ public class PrecoDataController extends HttpServlet {
                                 e.printStackTrace();
                             }
                         });
+                        try {
+                            finalDao.loadHist(lojaname);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                     } catch (SQLException | ClassNotFoundException | IOException e) {
                         e.printStackTrace();
                     }
@@ -212,29 +217,10 @@ public class PrecoDataController extends HttpServlet {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                break;
             }
-            case "/preco/load": {
-                System.out.println("tatu");
-                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
-                    dao = daoFactory.getPrecoDataDAO();
-                    try {
-                        dao.loadHist();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    response.sendRedirect(request.getContextPath() + "/preco/create");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
         }
     }
 

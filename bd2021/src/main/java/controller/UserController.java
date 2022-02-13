@@ -9,6 +9,19 @@ import com.google.gson.GsonBuilder;
 import dao.DAO;
 import dao.DAOFactory;
 import dao.UserDAO;
+import model.User;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -21,18 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.User;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -50,15 +51,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
         }
 )
 public class UserController extends HttpServlet {
-    
-    private static int MAX_FILE_SIZE = 1024 * 1024 * 4;
-    
+
+    private static final int MAX_FILE_SIZE = 1024 * 1024 * 4;
+
     /**
      * Pasta para salvar os arquivos que foram 'upados'. Os arquivos vão ser
      * salvos na pasta de build do servidor. Ao limpar o projeto (clean),
      * pode-se perder estes arquivos. Façam backup antes de limpar.
      */
-    private static String SAVE_DIR = "img";
+    private static final String SAVE_DIR = "img";
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -167,7 +168,6 @@ public class UserController extends HttpServlet {
 
             case "/user/create":
             case "/user/update": {
-                // Se fosse um form simples, usaria request.getParameter()
                 // String login = request.getParameter("login");
 
                 // Manipulação de form com enctype="multipart/form-data"
@@ -239,7 +239,7 @@ public class UserController extends HttpServlet {
                     if (servletPath.equals("/user/create")) {
                         dao.create(user);
                     } else {
-                        servletPath += "?id=" + String.valueOf(user.getId());
+                        servletPath += "?id=" + user.getId();
                         dao.update(user);
                     }
 

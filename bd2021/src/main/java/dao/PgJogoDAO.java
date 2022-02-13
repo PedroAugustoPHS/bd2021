@@ -117,6 +117,7 @@ public class PgJogoDAO implements JogoDAO{
             statement.setString(10, jogo.getSo());
             statement.setString(11, jogo.getArmazenamento());
             statement.setString(12, jogo.getImage());
+            statement.setInt(13, jogo.getId());
 
             if (statement.executeUpdate() < 1) {
                 throw new SQLException("Erro ao editar: jogo não encontrado.");
@@ -126,7 +127,7 @@ public class PgJogoDAO implements JogoDAO{
                 throw ex;
             }
             else {
-                throw new SQLException("Erro ao editar usuário.");
+                throw new SQLException("Erro ao editar jogo.");
             }
         }
     }

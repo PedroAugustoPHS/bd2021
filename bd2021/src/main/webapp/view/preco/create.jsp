@@ -23,13 +23,9 @@
         </div>
     </form>
     <br>
-    <br>
-
-    <form action="/preco/load" method="POST">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Carregar dados de histórico
-        </button>
-    </form>
+    <span>
+        Toda adição de um novo arquivo de preços atualiza o histórico simultaneamente.
+    </span>
 </div>
 
 <%@include file="/view/include/scripts.jsp" %>
