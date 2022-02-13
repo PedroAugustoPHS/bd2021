@@ -26,6 +26,7 @@ public class HistoricoController extends HttpServlet {
         HistoricoDAO dao;
         Historico historico;
         RequestDispatcher dispatcher;
+        request.setCharacterEncoding("UTF-8");
 
         switch (request.getServletPath()) {
             case "/load-hist": {

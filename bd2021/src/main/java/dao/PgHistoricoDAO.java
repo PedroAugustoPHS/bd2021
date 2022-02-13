@@ -134,7 +134,7 @@ public class PgHistoricoDAO implements HistoricoDAO{
     public void deleteHist (Integer Jid, Integer Lid) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(DELETE_QUERY)) {
             statement.setInt(1, Jid);
-            statement.setInt(1, Lid);
+            statement.setInt(2, Lid);
 
             if (statement.executeUpdate() < 1) {
                 throw new SQLException("Erro ao excluir: histórico não encontrado.");

@@ -140,6 +140,7 @@ public class PrecoDataController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         RequestDispatcher dispatcher;
+        request.setCharacterEncoding("UTF-8");
 
         switch (request.getServletPath()) {
             case "/preco/create": {
@@ -147,11 +148,6 @@ public class PrecoDataController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
 
-            }
-            case "/preco/load-hist": {
-                dispatcher = request.getRequestDispatcher("/view/preco/load-hist.jsp");
-                dispatcher.forward(request, response);
-                break;
             }
         }
     }
@@ -165,6 +161,7 @@ public class PrecoDataController extends HttpServlet {
         switch (request.getServletPath()) {
 
             case "/preco/create": {
+
                 JSONParser jsonP = new JSONParser();
                 java.sql.Date filedate;
                 String lojaname;

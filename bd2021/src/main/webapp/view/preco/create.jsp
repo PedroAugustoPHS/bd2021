@@ -13,7 +13,7 @@
 </head>
 <body>
 <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
-    <form class="form-jogo-create" onsubmit="return showAlert();"
+    <form class="form-jogo-create"
           action="${pageContext.servletContext.contextPath}/preco/create" method="POST">
         <h2 class="form-jogo-create-heading">Digite o nome arquivo de jogos</h2>
         <div class="row">

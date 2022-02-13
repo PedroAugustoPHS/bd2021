@@ -203,6 +203,7 @@ public class JogoController extends HttpServlet {
                 }
 
                 response.sendRedirect(request.getContextPath());
+                break;
             }
 
             case "/jogo/update": {

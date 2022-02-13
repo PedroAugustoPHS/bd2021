@@ -39,7 +39,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "ORDER BY data_registro;";
 
     private static final String MIN_PRICE_QUERY =
-            "SELECT MIN(bd2021.preco_data.preco) " +
+            "SELECT MIN(preco) AS minprice " +
                     "FROM bd2021.preco_data " +
                     "WHERE jogo_id = ? AND loja_id = ?;";
 
@@ -61,7 +61,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
 //                    "ORDER BY bd2021.preco_data.data_registro fetch first 1 rows only;";
 
     private static final String AVG_PRICE_QUERY =
-            "SELECT AVG(bd2021.preco_data.preco) " +
+            "SELECT AVG(preco) AS avgprice " +
                     "FROM bd2021.preco_data " +
                     "WHERE jogo_id = ? AND loja_id = ?;";
 
@@ -176,14 +176,13 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     }
 
     @Override
-    public void loadHist() throws SQLException, IOException, ClassNotFoundException {
+    public void loadHist(String filename) throws SQLException, IOException, ClassNotFoundException {
 
-        System.out.println("entrou");
         Integer jogo_id = 30;
         Integer loja_id = 0;
         Integer j;
         Float min_preco;
-        Date data_reg;
+        java.sql.Date data_reg;
         Integer promo;
         Float avg_price;
         Historico hist = new Historico();
