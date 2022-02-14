@@ -24,7 +24,8 @@
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
                 <h2 class="form-signin-heading">Digite o nome do game</h2>
                 <div class="row">
-                    <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="login" placeholder="Nome do jogo" required autofocus>
+                    <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="login"
+                           placeholder="Nome do jogo" required autofocus>
                     <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
                 </div>
             </form>

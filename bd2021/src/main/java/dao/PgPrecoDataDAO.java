@@ -49,8 +49,8 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "WHERE preco = ( " +
                     "SELECT MIN(preco) " +
                     "FROM bd2021.preco_data " +
-                    "WHERE jogo_id = ? AND loja_id = ? " +
-                    ")ORDER BY bd2021.preco_data.data_registro fetch first 1 rows only";
+                    "WHERE jogo_id = ? AND loja_id = ?) AND loja_id = ? " +
+                    "ORDER BY bd2021.preco_data.data_registro fetch first 1 rows only";
 
 //            "SELECT MIN(preco) AS minprice " +
 //                    "FROM bd2021.preco_data " +
@@ -227,6 +227,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
             try (PreparedStatement statement = connection.prepareStatement(HIST_QUERY)) {
                 statement.setInt(1, j);
                 statement.setInt(2, loja_id);
+                statement.setInt(3, loja_id);
                 try (ResultSet result = statement.executeQuery()) {
                     System.out.println("state:" + statement);
                     if (result.next()) {

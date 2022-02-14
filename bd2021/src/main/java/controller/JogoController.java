@@ -6,7 +6,9 @@ package controller;
 
 import dao.DAO;
 import dao.DAOFactory;
+import dao.HistoricoDAO;
 import dao.JogoDAO;
+import model.Historico;
 import model.Jogo;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -35,6 +37,7 @@ import java.util.List;
         name = "JogoController",
         urlPatterns = {
                 "/jogo",
+                "/jogo/hist",
                 "/jogo/create",
                 "/jogo/read",
                 "/jogo/update",
@@ -48,7 +51,12 @@ public class JogoController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         JogoDAO dao;
+        HistoricoDAO daoH;
         Jogo jogo;
+        Historico hist1;
+        Historico hist2;
+        Historico hist3;
+
         RequestDispatcher dispatcher;
 
         switch (request.getServletPath()) {
@@ -63,6 +71,27 @@ public class JogoController extends HttpServlet {
                 }
 
                 dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
+
+            case "/jogo/hist": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+
+                    daoH = daoFactory.getHistoricoDAO();
+
+                    hist1 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 1);
+                    request.setAttribute("histL1", hist1);
+                    hist2 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 2);
+                    request.setAttribute("histL2", hist2);
+                    hist3 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("histL3", hist3);
+
+                } catch (ClassNotFoundException | IOException | SQLException ex) {
+                    request.getSession().setAttribute("error", ex.getMessage());
+                }
+
+                dispatcher = request.getRequestDispatcher("/view/jogo/historico.jsp");
                 dispatcher.forward(request, response);
                 break;
             }

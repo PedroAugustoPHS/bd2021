@@ -49,7 +49,7 @@
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="button">
-            <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo">
+            <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo/hist?id=${jogo.id}">
                 Ver histórico de preços do jogo ${jogo.titulo}
             </a>
         </button>

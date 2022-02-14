@@ -89,7 +89,7 @@ public class PgHistoricoDAO implements HistoricoDAO{
             statement.setInt(2, Lid);
             try (ResultSet result = statement.executeQuery()) {
                 if (result.next()) {
-                    historico.setData_menor_preco(result.getDate("data_registro"));
+                    historico.setData_menor_preco(result.getDate("data_menor_preco"));
                     historico.setMenor_preco(result.getFloat("menor_preco"));
                     historico.setMedia_preco(result.getFloat("media_preco"));
                     historico.setMaior_promo(result.getInt("maior_promo"));
