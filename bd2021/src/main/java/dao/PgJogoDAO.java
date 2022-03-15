@@ -43,6 +43,12 @@ public class PgJogoDAO implements JogoDAO{
                     "FROM bd2021.jogo " +
                     "ORDER BY id;";
 
+    private static final String SEARCH_GAME =
+            "SELECT id,titulo,image " +
+                    "FROM bd2021.jogo " +
+                    "WHERE titulo ILIKE ?;";
+
+
     public PgJogoDAO(Connection connection) {
         this.connection = connection;
     }
@@ -200,5 +206,29 @@ public class PgJogoDAO implements JogoDAO{
 
         return jogoList;
     }
+
+    @Override
+    public List<Jogo> searchGames(String gameName) throws SQLException {
+        List<Jogo> jogoList = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(SEARCH_GAME)) {
+            statement.setString(1, "%" + gameName + "%");
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Jogo jogo = new Jogo();
+                    jogo.setId(result.getInt("id"));
+                    jogo.setTitulo(result.getString("titulo"));
+                    jogo.setImage(result.getString("image"));
+
+                    jogoList.add(jogo);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro");
+        }
+
+        return jogoList;
+    }
+
 
 }

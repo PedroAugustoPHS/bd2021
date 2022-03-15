@@ -37,6 +37,7 @@ import java.util.List;
         name = "JogoController",
         urlPatterns = {
                 "/jogo",
+                "/jogo/search",
                 "/jogo/hist",
                 "/jogo/create",
                 "/jogo/read",
@@ -69,7 +70,6 @@ public class JogoController extends HttpServlet {
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
                 }
-
                 dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
                 dispatcher.forward(request, response);
                 break;
