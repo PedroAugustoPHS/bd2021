@@ -10,7 +10,48 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/view/include/head.jsp"  %>
+        <%@include file="/view/include/scripts.jsp" %>
         <title>Drip games</title>
+        <script type="text/javascript">
+
+            // Load the Visualization API and the corechart package.
+            google.charts.load('current', {'packages':['corechart']});
+
+            // Set a callback to run when the Google Visualization API is loaded.
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Callback that creates and populates a data table,
+            // instantiates the pie chart, passes in the data and
+            // draws it.
+            function drawChart() {
+
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                /*for (i = 0; i < userList["jogos"].length; i++) {
+					data.addRows([
+						[userList["jogos"][i]["nome"],userList["jogos"][i]["numero"]]
+					]);
+          		}*/
+                data.addRows([
+                    ['Mushrooms', 3],
+                    ['Onions', 1],
+                    ['Olives', 1],
+                    ['Zucchini', 1],
+                    ['Pepperoni', 2]
+                ]);
+
+                // Set chart options
+                var options = {'title':'How Much Pizza I Ate Last Night',
+                    'width':500,
+                    'height':300};
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
     </head>
     <body>
         <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
@@ -21,10 +62,10 @@
             </div>
             <br>
             <br>
-            <form class="form-signin" action="${pageContext.servletContext.contextPath}/login" method="POST">
+            <form class="form-signin" action="${pageContext.servletContext.contextPath}/jogo/search" method="GET">
                 <h2 class="form-signin-heading">Digite o nome do game</h2>
                 <div class="row">
-                    <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="login"
+                    <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="search"
                            placeholder="Nome do jogo" required autofocus>
                     <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
                 </div>
@@ -52,7 +93,6 @@
             </button>
 
         </div>
-
-        <%@include file="/view/include/scripts.jsp" %>
+        <div id="chart_div"></div>
     </body>
 </html>

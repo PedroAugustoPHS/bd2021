@@ -75,6 +75,20 @@ public class JogoController extends HttpServlet {
                 break;
             }
 
+            case "/jogo/search": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    String token = request.getParameter("search");
+                    List<Jogo> jogoList = dao.searchGames(token);
+                    request.setAttribute("jogoList", jogoList);
+                } catch (ClassNotFoundException | IOException | SQLException ex) {
+                    request.getSession().setAttribute("error", ex.getMessage());
+                }
+                dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
+
             case "/jogo/hist": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
 
