@@ -65,6 +65,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "FROM bd2021.preco_data " +
                     "WHERE jogo_id = ? AND loja_id = ?;";
 
+
     public PgPrecoDataDAO(Connection connection) {
         this.connection = connection;
     }
@@ -238,10 +239,8 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                         hist.setData_menor_preco(data_reg);
                         hist.setMaior_promo(promo);
                     } else {
-                        System.out.println("tatu");
                     }
                 } catch (SQLException ex) {
-                    System.out.println("deu ruim2");
                     continue;
                 }
             } catch (SQLException ex) {
@@ -260,7 +259,6 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                         throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
                     }
                 } catch (SQLException ex) {
-                    System.out.println("deu ruim3");
                     continue;
                 }
             } catch (SQLException ex) {

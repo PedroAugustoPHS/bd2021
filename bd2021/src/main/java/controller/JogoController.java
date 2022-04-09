@@ -38,6 +38,7 @@ import java.util.List;
         urlPatterns = {
                 "/jogo",
                 "/jogo/search",
+                "/jogo/search-cat",
                 "/jogo/hist",
                 "/jogo/create",
                 "/jogo/read",
@@ -81,6 +82,25 @@ public class JogoController extends HttpServlet {
                     String token = request.getParameter("search");
                     List<Jogo> jogoList = dao.searchGames(token);
                     request.setAttribute("jogoList", jogoList);
+                } catch (ClassNotFoundException | IOException | SQLException ex) {
+                    request.getSession().setAttribute("error", ex.getMessage());
+                }
+                dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
+
+            case "/jogo/search-cat": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    String token = request.getParameter("cat");
+                    if (token == "all") {
+                        List<Jogo> jogoList = dao.showImportant();
+                        request.setAttribute("jogoList", jogoList);
+                    } else {
+                        List<Jogo> jogoList = dao.searchCategory(token);
+                        request.setAttribute("jogoList", jogoList);
+                    }
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
                 }
