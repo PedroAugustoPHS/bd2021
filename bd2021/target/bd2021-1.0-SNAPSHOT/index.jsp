@@ -15,7 +15,7 @@
         <script type="text/javascript">
 
             // Load the Visualization API and the corechart package.
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', {'packages': ['corechart']});
 
             // Set a callback to run when the Google Visualization API is loaded.
             google.charts.setOnLoadCallback(drawChart);
@@ -43,9 +43,11 @@
                 ]);
 
                 // Set chart options
-                var options = {'title':'How Much Pizza I Ate Last Night',
-                    'width':500,
-                    'height':300};
+                var options = {
+                    'title': 'How Much Pizza I Ate Last Night',
+                    'width': 500,
+                    'height': 300
+                };
 
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
@@ -54,26 +56,26 @@
         </script>
     </head>
     <body>
-        <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
-            <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;" class="logo">
-                <img
-                     src="${pageContext.request.contextPath}/img/drip_games.png"
-                     height="250px" width="450px"/>
+    <div style="display: flex;height: 100vh;flex-direction: column;justify-content: center;" class="container">
+        <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;" class="logo">
+            <img
+                    src="${pageContext.request.contextPath}/img/drip_games.png"
+                    height="250px" width="450px"/>
+        </div>
+        <br>
+        <br>
+        <form class="form-signin" action="${pageContext.servletContext.contextPath}/jogo/search" method="GET">
+            <h2 class="form-signin-heading">Digite o nome do game</h2>
+            <div class="row">
+                <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="search"
+                       placeholder="Nome do jogo" required autofocus>
+                <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
             </div>
-            <br>
-            <br>
-            <form class="form-signin" action="${pageContext.servletContext.contextPath}/jogo/search" method="GET">
-                <h2 class="form-signin-heading">Digite o nome do game</h2>
-                <div class="row">
-                    <input class="form-control col-6" style="height: 48px; margin-right: 2rem" type="text" name="search"
-                           placeholder="Nome do jogo" required autofocus>
-                    <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
-                </div>
-            </form>
-            <br>
-            <br>
-            <button class="btn btn-lg btn-primary btn-block" type="button">
-                <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo">
+        </form>
+        <br>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="button">
+            <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo">
                     Lista com todos os jogos
                 </a>
             </button>
@@ -92,7 +94,7 @@
                 </a>
             </button>
 
-        </div>
-        <div id="chart_div"></div>
+    </div>
+    <div id="chart_div"></div>
     </body>
 </html>

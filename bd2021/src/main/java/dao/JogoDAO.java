@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface JogoDAO extends DAO<Jogo>{
     List<Jogo> showImportant() throws SQLException;
-
     List<Jogo> searchGames(String gameName) throws SQLException;
 }

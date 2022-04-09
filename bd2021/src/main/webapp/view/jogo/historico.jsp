@@ -9,7 +9,36 @@
 <html>
 <head>
     <title>Historico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%@include file="/view/include/head.jsp" %>
+    <%@include file="/view/include/scripts.jsp" %>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Epic', 'Steam', 'Nuuvem'],
+                ['2013', 1000, 400, 0],
+                ['2014', 1170, 460, 0],
+                ['2015', 660, 1120, 0],
+                ['2016', 1030, 540, 0]
+            ]);
+
+            var options = {
+                title: 'Company Performance',
+                hAxis: {title: 'Year', titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0}
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
+
 <body>
 <div class="container">
     <div class="row">
@@ -37,8 +66,9 @@
                     <span>Maior porcentagem promocional: ${histL3.maior_promo} </span><br>
                     <span>Menor preço registrado: ${histL3.menor_preco} </span><br>
                     <span>Média de preço: ${histL3.media_preco} </span><br>
-                    <div>
-                    </div>
                 </div>
+            </div>
+        </div>
+        <div id="chart_div"></div>
 </body>
 </html>
