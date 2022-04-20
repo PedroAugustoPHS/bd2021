@@ -10,5 +10,5 @@ public interface JogoDAO extends DAO<Jogo> {
 
     List<Jogo> searchGames(String gameName, String[] category) throws SQLException;
 
-    List<Jogo> searchCategory(String gameCategory) throws SQLException;
+    //List<Jogo> searchCategory(String gameCategory, String[] category) throws SQLException;
 }
