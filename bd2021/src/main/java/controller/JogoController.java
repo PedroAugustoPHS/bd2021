@@ -54,10 +54,14 @@ public class JogoController extends HttpServlet {
 
         JogoDAO dao;
         HistoricoDAO daoH;
+        PrecoDataDAO daoPD;
         Jogo jogo;
         Historico hist1;
         Historico hist2;
         Historico hist3;
+        List<PrecoData> pd1;
+        List<PrecoData> pd2;
+        List<PrecoData> pd3;
 
         RequestDispatcher dispatcher;
 
@@ -90,25 +94,6 @@ public class JogoController extends HttpServlet {
                 break;
             }
 
-            case "/jogo/search-cat": {
-                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
-                    dao = daoFactory.getJogoDAO();
-                    String token = request.getParameter("cat");
-                    if (token == "all") {
-                        List<Jogo> jogoList = dao.showImportant();
-                        request.setAttribute("jogoList", jogoList);
-                    } else {
-                        List<Jogo> jogoList = dao.searchCategory(token);
-                        request.setAttribute("jogoList", jogoList);
-                    }
-                } catch (ClassNotFoundException | IOException | SQLException ex) {
-                    request.getSession().setAttribute("error", ex.getMessage());
-                }
-                dispatcher = request.getRequestDispatcher("/view/jogo/index.jsp");
-                dispatcher.forward(request, response);
-                break;
-            }
-
             case "/jogo/hist": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
 
@@ -120,6 +105,16 @@ public class JogoController extends HttpServlet {
                     request.setAttribute("histL2", hist2);
                     hist3 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 3);
                     request.setAttribute("histL3", hist3);
+
+                    daoPD = daoFactory.getPrecoDataDAO();
+
+                    pd1 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 1);
+                    request.setAttribute("pd1", pd1);
+                    System.out.println(pd1);
+                    pd2 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 2);
+                    request.setAttribute("pd2", pd2);
+                    pd3 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("pd3", pd3);
 
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());

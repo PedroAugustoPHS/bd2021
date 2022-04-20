@@ -24,6 +24,12 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "FROM bd2021.preco_data " +
                     "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
 
+    private static final String READ2_QUERY =
+            "SELECT data_registro, preco, porcentagem_promo " +
+                    "FROM bd2021.preco_data " +
+                    "WHERE jogo_id = ?, loja_id = ?" +
+                    "ORDER BY data_registro;";
+
     private static final String UPDATE_QUERY =
             "UPDATE bd2021.preco_data " +
                     "SET preco = ?, porcentagem_promo = ? " +
@@ -90,6 +96,26 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     @Override
     public PrecoData read(Integer id) throws SQLException {
         return null;
+    }
+
+    @Override
+    public List<PrecoData> readPreco(Integer jogo_id, Integer loja_id) throws SQLException {
+        List<PrecoData> listP = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(READ2_QUERY)) {
+            statement.setInt(1, jogo_id);
+            statement.setInt(2, loja_id);
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    PrecoData preco_data = new PrecoData();
+                    preco_data.setData_registro(result.getDate("data_registro"));
+                    preco_data.setPreco(result.getFloat("preco"));
+                    preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                    listP.add(preco_data);
+                }
+            }
+            return listP;
+        }
     }
 
     @Override

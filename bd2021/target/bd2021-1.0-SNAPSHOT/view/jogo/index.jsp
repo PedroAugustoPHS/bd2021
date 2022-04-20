@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file="/view/include/head.jsp"  %>
+    <%@include file="/view/include/head.jsp" %>
     <title>Jogo</title>
 </head>
 <body>
@@ -13,80 +13,58 @@
         <br>
         <div>
             <form class="form-signin" action="${pageContext.servletContext.contextPath}/jogo/search" method="GET">
-                <h2 class="form-signin-heading" style="margin-left: 16px;" >Digite o nome do game</h2>
+                <h2 class="form-signin-heading" style="margin-left: 16px;">Digite o nome do game</h2>
                 <div class="row">
-                    <input class="form-control col-6" style="height: 48px; margin-left: 30px; margin-right: 2rem" type="text" name="search"
-                           placeholder="Nome do jogo" required autofocus>
+                    <input class="form-control col-6" style="height: 48px; margin-left: 30px; margin-right: 2rem"
+                           type="text" name="search"
+                           placeholder="Nome do jogo">
                     <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
+                </div>
+                <br>
+                <div>
+                    <div class="btn-group-toggle" data-toggle="buttons" aria-label="Categorias" style="margin-left: 16px;">
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Ação"> Ação
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Aventura"> Aventura
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Baseado em Turnos"> Baseado em Turnos
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Casual"> Casual
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Independente"> Independente
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Mundo Aberto"> Mundo Aberto
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Plataforma"> Plataforma
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="RPG"> RPG
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Simulação"> Simulação
+                        </label>
+                    </div>
                 </div>
             </form>
         </div>
         <br>
-        <div>
-            <div class="btn-group" role="group" aria-label="Categorias" style="height: 48px; margin-left: 16px;">
-                <button type="button" class="btn btn-secondary">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=All" methods="GET">
-                        Todos
-                    </a></button>
-                <button type="button" class="btn btn-secondary">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Ação" methods="GET">
-                        Ação
-                    </a></button>
-                <button type="button" class="btn btn-secondary">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Adventure" methods="GET">
-                        Aventura
-                    </a></button>
-                <button type="button" class="btn btn-secondary">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Baseado" methods="GET">
-                        Baseado em Turnos
-                    </a></button>
-                <button type="button" class="btn btn-secondary" name="Casual">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Casual" methods="GET">
-                        Casual
-                    </a></button>
-                <button type="button" class="btn btn-secondary">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Independente" methods="GET">
-                        Independente
-                    </a></button>
-                <button type="button" class="btn btn-secondary" name="RPG">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=RPG" methods="GET">
-                        RPG
-                    </a></button>
-                <button type="button" class="btn btn-secondary" name="Mundo Aberto">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Mundo" methods="GET">
-                        Mundo Aberto
-                    </a></button>
-                <button type="button" class="btn btn-secondary" name="Plataforma">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Plataforma" methods="GET">
-                        Plataforma
-                    </a></button>
-                <button type="button" class="btn btn-secondary" name="Simulação">
-                    <a style="color: #fff; text-decoration: none"
-                       href="${pageContext.servletContext.contextPath}/jogo/search-cat?cat=Simulação" methods="GET">
-                        Simulação
-                    </a></button>
-            </div>
-        </div>
-        <br>
         <div class="container">
             <div class="row">
-                    <c:forEach var="jogo" items="${requestScope.jogoList}" varStatus="loop">
-                        <div class="col-4 mb-5">
-                            <div class="card" style="width: 18rem;">
-                                <div style="display: flex; justify-content: space-between">
-                                    <a class="btn btn-default"
-                                       href="${pageContext.servletContext.contextPath}/jogo/update?id=${jogo.id}"
-                                       data-toggle="tooltip"
-                                       data-original-title="Editar">
+                <c:forEach var="jogo" items="${requestScope.jogoList}" varStatus="loop">
+                    <div class="col-4 mb-5">
+                        <div class="card" style="width: 18rem;">
+                            <div style="display: flex; justify-content: space-between">
+                                <a class="btn btn-default"
+                                   href="${pageContext.servletContext.contextPath}/jogo/update?id=${jogo.id}"
+                                   data-toggle="tooltip"
+                                   data-original-title="Editar">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a class="btn btn-default link_excluir_usuario"

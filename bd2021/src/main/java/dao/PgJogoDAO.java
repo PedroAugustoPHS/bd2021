@@ -46,12 +46,7 @@ public class PgJogoDAO implements JogoDAO{
     private static final String SEARCH_GAME =
             "SELECT id,titulo,image " +
                     "FROM bd2021.jogo " +
-                    "WHERE titulo ILIKE ?;";
-
-    private static final String SEARCH_GAME_CATEGORY =
-            "SELECT id,titulo,image " +
-                    "FROM bd2021.jogo " +
-                    "WHERE categoria LIKE ?;";
+                    "WHERE ";
 
 
     public PgJogoDAO(Connection connection) {
@@ -213,18 +208,38 @@ public class PgJogoDAO implements JogoDAO{
     }
 
     @Override
-    public List<Jogo> searchGames(String gameName) throws SQLException {
+    public List<Jogo> searchGames(String gameName, String[] category) throws SQLException {
         List<Jogo> jogoList = new ArrayList<>();
 
-        try (PreparedStatement statement = connection.prepareStatement(SEARCH_GAME)) {
-            statement.setString(1, "%" + gameName + "%");
+        String categorySQL = "";
+        String gameSQL = "";
+        if (gameName != null) {
+            gameSQL += (" titulo ILIKE '%" + gameName + "%'");
+        }
+        if (category != null && gameName != null) {
+            categorySQL += (" AND categoria ILIKE '%" + category[0] + "%'");
+            for (int i = 1; i < category.length; i++) {
+                categorySQL += (" OR categoria ILIKE '%" + category[i] + "%'");
+            }
+        }
+        if (category != null && gameName == null) {
+            categorySQL += (" categoria ILIKE '%" + category[0] + "%'");
+            for (int i = 1; i < category.length; i++) {
+                categorySQL += (" OR categoria ILIKE '%" + category[i] + "%'");
+            }
+        }
+        gameSQL += categorySQL;
+        String search = SEARCH_GAME + gameSQL + ';';
+
+        try (PreparedStatement statement = connection.prepareStatement(search)) {
+            System.out.println(search);
+
             try (ResultSet result = statement.executeQuery()) {
                 while (result.next()) {
                     Jogo jogo = new Jogo();
                     jogo.setId(result.getInt("id"));
                     jogo.setTitulo(result.getString("titulo"));
                     jogo.setImage(result.getString("image"));
-
                     jogoList.add(jogo);
                 }
             }
@@ -234,29 +249,5 @@ public class PgJogoDAO implements JogoDAO{
 
         return jogoList;
     }
-
-    @Override
-    public List<Jogo> searchCategory(String gameCategory) throws SQLException {
-        List<Jogo> jogoList = new ArrayList<>();
-
-        try (PreparedStatement statement = connection.prepareStatement(SEARCH_GAME_CATEGORY)) {
-            statement.setString(1, "%" + gameCategory + "%");
-            try (ResultSet result = statement.executeQuery()) {
-                while (result.next()) {
-                    Jogo jogo = new Jogo();
-                    jogo.setId(result.getInt("id"));
-                    jogo.setTitulo(result.getString("titulo"));
-                    jogo.setImage(result.getString("image"));
-
-                    jogoList.add(jogo);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Erro");
-        }
-
-        return jogoList;
-    }
-
 
 }

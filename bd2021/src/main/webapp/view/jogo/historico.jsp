@@ -41,6 +41,11 @@
 
 <body>
 <div class="container">
+    <div>
+        <c:forEach items="${pd1}" var="item">
+            ${item.preco}<br>
+        </c:forEach>
+    </div>
     <div class="row">
         <h1>Epic</h1>
         <div class="col-12">
