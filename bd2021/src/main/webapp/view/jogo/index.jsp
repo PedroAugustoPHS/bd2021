@@ -17,8 +17,44 @@
                 <div class="row">
                     <input class="form-control col-6" style="height: 48px; margin-left: 30px; margin-right: 2rem"
                            type="text" name="search"
-                           placeholder="Nome do jogo" required autofocus>
+                           placeholder="Nome do jogo">
                     <button class="btn btn-lg btn-primary btn-block col-2" type="submit">Buscar</button>
+                </div>
+                <br>
+                <div>
+                    <div class="btn-group-toggle" data-toggle="buttons" aria-label="Categorias"
+                         style="margin-left: 16px;">
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Ação"> Ação
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Aventura"> Aventura
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Baseado em Turnos">
+                            Baseado em Turnos
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Casual"> Casual
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Independente">
+                            Independente
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Mundo Aberto"> Mundo
+                            Aberto
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Plataforma"> Plataforma
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="RPG"> RPG
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Simulação"> Simulação
+                        </label>
+                    </div>
                 </div>
             </form>
         </div>

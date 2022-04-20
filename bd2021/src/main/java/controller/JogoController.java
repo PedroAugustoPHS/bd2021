@@ -4,12 +4,10 @@
  */
 package controller;
 
-import dao.DAO;
-import dao.DAOFactory;
-import dao.HistoricoDAO;
-import dao.JogoDAO;
+import dao.*;
 import model.Historico;
 import model.Jogo;
+import model.PrecoData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -83,8 +81,9 @@ public class JogoController extends HttpServlet {
             case "/jogo/search": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();
+                    String[] category = request.getParameterValues("categoria");
                     String token = request.getParameter("search");
-                    List<Jogo> jogoList = dao.searchGames(token);
+                    List<Jogo> jogoList = dao.searchGames(token, category);
                     request.setAttribute("jogoList", jogoList);
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
