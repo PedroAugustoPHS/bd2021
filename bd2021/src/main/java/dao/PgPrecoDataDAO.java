@@ -27,17 +27,17 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     private static final String READ2_QUERY =
             "SELECT data_registro, preco, porcentagem_promo " +
                     "FROM bd2021.preco_data " +
-                    "WHERE jogo_id = ?, loja_id = ?" +
-                    "ORDER BY data_registro;";
+                    "WHERE jogo_id = ? AND loja_id = ? " +
+                    "ORDER BY data_registro DESC ;";
 
     private static final String UPDATE_QUERY =
             "UPDATE bd2021.preco_data " +
                     "SET preco = ?, porcentagem_promo = ? " +
-                    "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
+                    "WHERE data_registro = ? AND jogo_id = ? AND loja_id = ?;";
 
     private static final String DELETE_QUERY =
             "DELETE FROM bd2021.preco_data " +
-                    "WHERE data_registro = ?, jogo_id = ?, loja_id = ?;";
+                    "WHERE data_registro = ? AND jogo_id = ? AND loja_id = ?;";
 
     private static final String ALL_QUERY =
             "SELECT data_registro, preco, porcentagem_promo, jogo_id, loja_id " +
@@ -111,6 +111,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     preco_data.setData_registro(result.getDate("data_registro"));
                     preco_data.setPreco(result.getFloat("preco"));
                     preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+
                     listP.add(preco_data);
                 }
             }

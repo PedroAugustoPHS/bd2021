@@ -22,7 +22,8 @@
                 </div>
                 <br>
                 <div>
-                    <div class="btn-group-toggle" data-toggle="buttons" aria-label="Categorias" style="margin-left: 16px;">
+                    <div class="btn-group-toggle" data-toggle="buttons" aria-label="Categorias"
+                         style="margin-left: 16px;">
                         <label class="btn btn-secondary">
                             <input type="checkbox" autocomplete="off" name="categoria" value="Ação"> Ação
                         </label>
@@ -30,16 +31,19 @@
                             <input type="checkbox" autocomplete="off" name="categoria" value="Aventura"> Aventura
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="checkbox" autocomplete="off" name="categoria" value="Baseado em Turnos"> Baseado em Turnos
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Baseado em Turnos">
+                            Baseado em Turnos
                         </label>
                         <label class="btn btn-secondary">
                             <input type="checkbox" autocomplete="off" name="categoria" value="Casual"> Casual
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="checkbox" autocomplete="off" name="categoria" value="Independente"> Independente
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Independente">
+                            Independente
                         </label>
                         <label class="btn btn-secondary">
-                            <input type="checkbox" autocomplete="off" name="categoria" value="Mundo Aberto"> Mundo Aberto
+                            <input type="checkbox" autocomplete="off" name="categoria" value="Mundo Aberto"> Mundo
+                            Aberto
                         </label>
                         <label class="btn btn-secondary">
                             <input type="checkbox" autocomplete="off" name="categoria" value="Plataforma"> Plataforma

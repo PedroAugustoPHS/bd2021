@@ -43,7 +43,7 @@
 <div class="container">
     <div>
         <c:forEach items="${pd1}" var="item">
-                ${item.preco}<br>
+            ${item.preco}<br>
         </c:forEach>
     </div>
     <div class="row">

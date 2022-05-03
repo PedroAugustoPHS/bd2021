@@ -22,9 +22,9 @@
                         <img class="col-12" src="${jogo.image}"/>
                     </div>
                     <div class="col-6">
-                        <span>Steam: </span><br>
-                        <span>Epic: </span><br>
-                        <span>Nuuvem: </span><br>
+                        <span>Steam: </span>${pd1[0].preco}<br>
+                        <span>Epic: </span>${pd2[0].preco}<br>
+                        <span>Nuuvem: </span>${pd3[0].preco}<br>
                     </div>
                 </div>
             </div>

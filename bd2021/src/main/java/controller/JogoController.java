@@ -160,10 +160,18 @@ public class JogoController extends HttpServlet {
             case "/jogo/read": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();
-
+                    daoPD = daoFactory.getPrecoDataDAO();
                     jogo = dao.read(Integer.parseInt(request.getParameter("id")));
-
                     request.setAttribute("jogo", jogo);
+                    pd1 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 1);
+                    pd2 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 2);
+                    pd3 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("pd1", pd1);
+                    request.setAttribute("pd2", pd2);
+                    request.setAttribute("pd3", pd3);
+                    System.out.println("pd1:" + pd1);
+                    System.out.println("pd2:" + pd2);
+                    System.out.println("pd3:" + pd3);
 
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
@@ -233,8 +241,8 @@ public class JogoController extends HttpServlet {
 
                 try {
                     String jsonName = request.getParameter("fileName");
-                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
 
                     JSONArray jogoList = (JSONArray) obj;
