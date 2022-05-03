@@ -97,21 +97,20 @@ public class JogoController extends HttpServlet {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
 
                     daoH = daoFactory.getHistoricoDAO();
+                    daoPD = daoFactory.getPrecoDataDAO();
 
                     hist1 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 1);
                     request.setAttribute("histL1", hist1);
-                    hist2 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 2);
-                    request.setAttribute("histL2", hist2);
-                    hist3 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 3);
-                    request.setAttribute("histL3", hist3);
-
-                    daoPD = daoFactory.getPrecoDataDAO();
-
                     pd1 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 1);
                     request.setAttribute("pd1", pd1);
-                    System.out.println(pd1);
+
+                    hist2 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 2);
+                    request.setAttribute("histL2", hist2);
                     pd2 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 2);
                     request.setAttribute("pd2", pd2);
+
+                    hist3 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("histL3", hist3);
                     pd3 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 3);
                     request.setAttribute("pd3", pd3);
 
@@ -169,9 +168,6 @@ public class JogoController extends HttpServlet {
                     request.setAttribute("pd1", pd1);
                     request.setAttribute("pd2", pd2);
                     request.setAttribute("pd3", pd3);
-                    System.out.println("pd1:" + pd1);
-                    System.out.println("pd2:" + pd2);
-                    System.out.println("pd3:" + pd3);
 
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
