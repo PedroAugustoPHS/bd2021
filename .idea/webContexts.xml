@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/bd2021/src/main/webapp/view/jogo/historico.jsp" value="file://$PROJECT_DIR$/bd2021/src/main/webapp/view/jogo" />
         <entry key="file://$PROJECT_DIR$/bd2021/src/main/webapp/view/preco/create-hist.jsp" value="file://$PROJECT_DIR$/bd2021/src/main/webapp/view/preco" />
       </map>
     </option>

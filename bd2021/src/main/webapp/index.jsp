@@ -76,23 +76,31 @@
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="button">
             <a style="color: #fff; text-decoration: none" href="${pageContext.servletContext.contextPath}/jogo">
-                    Lista com todos os jogos
-                </a>
-            </button>
+                Lista com todos os jogos
+            </a>
+        </button>
 
-            <button class="btn btn-lg btn-primary btn-block" type="button">
-                <a style="color: #fff; text-decoration: none"
-                   href="${pageContext.servletContext.contextPath}/jogo/create" methods="GET">
-                    Adicionar jogos ao catálogo
-                </a>
-            </button>
+        <button class="btn btn-lg btn-primary btn-block" type="button">
+            <a style="color: #fff; text-decoration: none"
+               href="${pageContext.servletContext.contextPath}/jogo/create" methods="GET">
+                Adicionar jogos ao catálogo
+            </a>
+        </button>
 
-            <button class="btn btn-lg btn-primary btn-block" type="button">
-                <a style="color: #fff; text-decoration: none"
-                   href="${pageContext.servletContext.contextPath}/preco/create" methods="GET">
-                    Fazer uma nova leitura de preços
-                </a>
-            </button>
+        <button class="btn btn-lg btn-primary btn-block" type="button">
+            <a style="color: #fff; text-decoration: none"
+               href="${pageContext.servletContext.contextPath}/preco/create" methods="GET">
+                Fazer uma nova leitura de preços
+            </a>
+        </button>
+
+        <button class="btn btn-lg btn-primary btn-block" type="button">
+            <a style="color: #fff; text-decoration: none"
+               href="${pageContext.servletContext.contextPath}/jogo/top" methods="GET">
+                TOP ALGUMA COISA!
+            </a>
+        </button>
+
 
     </div>
     <div id="chart_div"></div>

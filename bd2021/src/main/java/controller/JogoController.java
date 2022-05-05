@@ -43,6 +43,10 @@ import java.util.List;
                 "/jogo/update",
                 "/jogo/delete",
                 "/jogo/checkLogin",
+                "/jogo/top-barato",
+                "/jogo/top-promocao",
+                "/jogo/top-drip",
+                "/jogo/top-caro",
         }
 )
 public class JogoController extends HttpServlet {
@@ -176,6 +180,65 @@ public class JogoController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+            case "/jogo/top": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+
+                    List<Jogo> jogoList = dao.showImportant();
+                    request.setAttribute("jogoList", jogoList);
+                } catch (ClassNotFoundException | IOException | SQLException ex) {
+                    request.getSession().setAttribute("error", ex.getMessage());
+                }
+                dispatcher = request.getRequestDispatcher("/view/jogo/top.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "/jogo/top-barato": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    daoPD = daoFactory.getPrecoDataDAO();
+
+                    dao.readTop
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case "/jogo/top-promocao": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    daoPD = daoFactory.getPrecoDataDAO();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case "/jogo/top-drip": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    daoPD = daoFactory.getPrecoDataDAO();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            case "/jogo/top-caro": {
+                try (DAOFactory daoFactory = DAOFactory.getInstance()) {
+                    dao = daoFactory.getJogoDAO();
+                    daoPD = daoFactory.getPrecoDataDAO();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
         }
 
     }
@@ -237,8 +300,8 @@ public class JogoController extends HttpServlet {
 
                 try {
                     String jsonName = request.getParameter("fileName");
-                    FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
-                    //FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    //FileReader reader = new FileReader("C:/Users/yoshi/Documents/drip_games/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
+                    FileReader reader = new FileReader("C:/Users/Guto/IdeaProjects/bd2021/Scrapy/teste/spiders/" + jsonName, StandardCharsets.UTF_8);
                     Object obj = jsonP.parse(reader);
 
                     JSONArray jogoList = (JSONArray) obj;
