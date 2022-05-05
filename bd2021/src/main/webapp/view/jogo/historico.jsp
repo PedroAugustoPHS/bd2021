@@ -18,14 +18,26 @@
         google.charts.load('current', {'packages': ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
+        var precodata1 = ${pd1};
+        var precodata2 = ${pd2};
+        var precodata3 = ${pd3};
+        var array_pd = [['Data', 'Epic', 'Steam', 'Nuuvem'],];
+
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Year', 'Epic', 'Steam', 'Nuuvem'],
-                ['2013', 1000, 400, 0],
-                ['2014', 1170, 460, 0],
-                ['2015', 660, 1120, 0],
-                ['2016', 1030, 540, 0]
-            ]);
+            var data1 = google.visualization.arrayToDataTable;
+            //var data2 = google.visualization.arrayToDataTable;
+            //var data3 = google.visualization.arrayToDataTable;
+
+
+            for (i = 0; i < precodata1["preco"].length; i++) {
+                data1.addRows([precodata1["data"][i], precodata1["preco"][i]);
+            }
+            /*for (i = 0; i < precodata2["preco"].length; i++) {
+                data2.addRows([precodata2[i]["data"],precodata2[i]["preco"]]);
+            }
+            for (i = 0; i < precodata3["preco"].length; i++) {
+                data3.addRows([precodata3[i]["data"],precodata3[i]["preco"]]);
+            }*/
 
             var options = {
                 title: 'Company Performance',
@@ -34,7 +46,9 @@
             };
 
             var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
+            chart.draw(data1, options);
+            /*chart.draw(data2, options);
+             chart.draw(data3, options);*/
         }
     </script>
 </head>

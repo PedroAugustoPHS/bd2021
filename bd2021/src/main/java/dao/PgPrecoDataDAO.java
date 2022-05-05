@@ -71,6 +71,16 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "FROM bd2021.preco_data " +
                     "WHERE jogo_id = ? AND loja_id = ?;";
 
+    private static final String GET_TOP_BARATO =
+            "SELECT * " +
+                    "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
+                    "ORDER BY data_registro DESC,preco ASC LIMIT 12;";
+
+    private static final String GET_TOP_PROMO =
+            "SELECT * " +
+                    "FROM bd2021.preco_data " +
+                    "ORDER BY data_registro DESC, porcentagem_promo DESC LIMIT 12;";
+
 
     public PgPrecoDataDAO(Connection connection) {
         this.connection = connection;
@@ -309,5 +319,23 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
             }
         }
 
+    }
+
+    public List<PrecoData> readTopBarato() throws SQLException {
+        List<PrecoData> precoDataList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_BARATO)) {
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    PrecoData preco_data = new PrecoData();
+                    preco_data.setData_registro(result.getDate("data_registro"));
+                    preco_data.setPreco(result.getFloat("preco"));
+                    preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                    precoDataList.add(preco_data);
+                } else {
+                    throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
+                }
+            }
+            return precoDataList;
+        }
     }
 }

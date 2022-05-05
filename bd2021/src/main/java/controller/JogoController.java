@@ -332,6 +332,7 @@ public class JogoController extends HttpServlet {
 
             case "/jogo/update": {
 
+
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     dao = daoFactory.getJogoDAO();
 
@@ -358,6 +359,7 @@ public class JogoController extends HttpServlet {
                 }
                 break;
             }
+
         }
     }
 
