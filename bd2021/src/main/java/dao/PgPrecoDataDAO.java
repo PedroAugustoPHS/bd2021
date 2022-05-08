@@ -2,6 +2,7 @@ package dao;
 
 import model.Historico;
 import model.PrecoData;
+import model.PrecoJogo;
 
 import java.io.IOException;
 import java.sql.*;
@@ -71,15 +72,33 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "FROM bd2021.preco_data " +
                     "WHERE jogo_id = ? AND loja_id = ?;";
 
+    private static final String GET_TOP_ALL =
+            "SELECT * " +
+                    "FROM bd2021.preco_data " +
+                    "INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
+                    "WHERE data_registro = (SELECT MAX(data_registro) FROM bd2021.preco_data) " +
+                    "ORDER BY jogo_id;";
+
     private static final String GET_TOP_BARATO =
             "SELECT * " +
                     "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
                     "ORDER BY data_registro DESC,preco ASC LIMIT 12;";
 
+    private static final String GET_TOP_CARO =
+            "SELECT * " +
+                    "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
+                    "ORDER BY data_registro DESC,preco DESC LIMIT 12;";
+
+    //fazer uma query bacana aqui (ou nao)
+    private static final String GET_TOP_DRIP =
+            "SELECT * " +
+                    "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
+                    "ORDER BY data_registro DESC,preco DESC LIMIT 12;";
+
     private static final String GET_TOP_PROMO =
             "SELECT * " +
-                    "FROM bd2021.preco_data " +
-                    "ORDER BY data_registro DESC, porcentagem_promo DESC LIMIT 12;";
+                    "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
+                    "ORDER BY porcentagem_promo DESC LIMIT 12;";
 
 
     public PgPrecoDataDAO(Connection connection) {
@@ -321,21 +340,113 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
 
     }
 
-    public List<PrecoData> readTopBarato() throws SQLException {
-        List<PrecoData> precoDataList = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_BARATO)) {
-            try (ResultSet result = statement.executeQuery()) {
-                if (result.next()) {
-                    PrecoData preco_data = new PrecoData();
-                    preco_data.setData_registro(result.getDate("data_registro"));
-                    preco_data.setPreco(result.getFloat("preco"));
-                    preco_data.setPorcentagem_promo(result.getInt("porcentagem_promo"));
-                    precoDataList.add(preco_data);
-                } else {
-                    throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
+    @Override
+    public List<PrecoJogo> readTopBarato() throws SQLException {
+        List<PrecoJogo> precoJogoList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_BARATO);
+            ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    PrecoJogo preco_jogo = new PrecoJogo();
+                    preco_jogo.setData_registro(result.getDate("data_registro"));
+                    preco_jogo.setPreco(result.getFloat("preco"));
+                    preco_jogo.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                    preco_jogo.setImage(result.getString("image"));
+                    preco_jogo.setTitulo(result.getString("titulo"));
+                    preco_jogo.setJogo_id(result.getInt("jogo_id"));
+                    preco_jogo.setLoja_id(result.getInt("loja_id"));
+                    precoJogoList.add(preco_jogo);
                 }
+                } catch (SQLException ex) {
+                    throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
             }
-            return precoDataList;
+            return precoJogoList;
+    }
+
+    @Override
+    public List<PrecoJogo> readTopCaro() throws SQLException {
+        List<PrecoJogo> precoJogoList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_CARO);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                PrecoJogo preco_jogo = new PrecoJogo();
+                preco_jogo.setData_registro(result.getDate("data_registro"));
+                preco_jogo.setPreco(result.getFloat("preco"));
+                preco_jogo.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                preco_jogo.setImage(result.getString("image"));
+                preco_jogo.setTitulo(result.getString("titulo"));
+                preco_jogo.setJogo_id(result.getInt("jogo_id"));
+                preco_jogo.setLoja_id(result.getInt("loja_id"));
+                precoJogoList.add(preco_jogo);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
         }
+        return precoJogoList;
+    }
+
+    @Override
+    public List<PrecoJogo> readTopPromo() throws SQLException {
+        List<PrecoJogo> precoJogoList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_PROMO);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                PrecoJogo preco_jogo = new PrecoJogo();
+                preco_jogo.setData_registro(result.getDate("data_registro"));
+                preco_jogo.setPreco(result.getFloat("preco"));
+                preco_jogo.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                preco_jogo.setImage(result.getString("image"));
+                preco_jogo.setTitulo(result.getString("titulo"));
+                preco_jogo.setJogo_id(result.getInt("jogo_id"));
+                preco_jogo.setLoja_id(result.getInt("loja_id"));
+                precoJogoList.add(preco_jogo);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
+        }
+        return precoJogoList;
+    }
+
+    @Override
+    public List<PrecoJogo> readTopDrip() throws SQLException {
+        List<PrecoJogo> precoJogoList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_DRIP);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                PrecoJogo preco_jogo = new PrecoJogo();
+                preco_jogo.setData_registro(result.getDate("data_registro"));
+                preco_jogo.setPreco(result.getFloat("preco"));
+                preco_jogo.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                preco_jogo.setImage(result.getString("image"));
+                preco_jogo.setTitulo(result.getString("titulo"));
+                preco_jogo.setJogo_id(result.getInt("jogo_id"));
+                preco_jogo.setLoja_id(result.getInt("loja_id"));
+                precoJogoList.add(preco_jogo);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
+        }
+        return precoJogoList;
+    }
+
+    @Override
+    public List<PrecoJogo> showAll() throws SQLException {
+        List<PrecoJogo> precoJogoList = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_ALL);
+             ResultSet result = statement.executeQuery()) {
+            while (result.next()) {
+                PrecoJogo preco_jogo = new PrecoJogo();
+                preco_jogo.setData_registro(result.getDate("data_registro"));
+                preco_jogo.setPreco(result.getFloat("preco"));
+                preco_jogo.setPorcentagem_promo(result.getInt("porcentagem_promo"));
+                preco_jogo.setImage(result.getString("image"));
+                preco_jogo.setTitulo(result.getString("titulo"));
+                preco_jogo.setJogo_id(result.getInt("jogo_id"));
+                preco_jogo.setLoja_id(result.getInt("loja_id"));
+                precoJogoList.add(preco_jogo);
+            }
+        } catch (SQLException ex) {
+            throw new SQLException("Erro ao visualizar: preco_data não encontrado.");
+        }
+        return precoJogoList;
     }
 }
