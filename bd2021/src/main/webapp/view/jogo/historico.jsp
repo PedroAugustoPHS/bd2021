@@ -17,14 +17,12 @@
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['line']});
         google.charts.setOnLoadCallback(drawChart);
-
-
+        var preco1 = ${pd1};
+        var preco2 = '${pd2}';
+        var preco3 = '${pd3}';
 
         function drawChart() {
 
-            var preco1 = '${pd1}';
-            var preco2 = '${pd2}';
-            var preco3 = '${pd3}';
             var data = new google.visualization.DataTable();
             console.log(preco1[0]["preco"]);
 
