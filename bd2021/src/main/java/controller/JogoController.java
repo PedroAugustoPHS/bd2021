@@ -46,7 +46,7 @@ import java.util.List;
                 "/jogo/top",
                 "/jogo/top-barato",
                 "/jogo/top-promocao",
-                "/jogo/top-drip",
+                "/jogo/top-hoje",
                 "/jogo/top-caro",
         }
 )
@@ -222,10 +222,10 @@ public class JogoController extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "/jogo/top-drip": {
+            case "/jogo/top-hoje": {
                 try (DAOFactory daoFactory = DAOFactory.getInstance()) {
                     daoPD = daoFactory.getPrecoDataDAO();
-                    pdJ = daoPD.readTopDrip();
+                    pdJ = daoPD.readTopPromoHoje();
                     request.setAttribute("jogoList", pdJ);
                 } catch (SQLException e) {
                     e.printStackTrace();

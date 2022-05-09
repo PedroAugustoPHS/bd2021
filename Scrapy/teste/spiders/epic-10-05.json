@@ -83,12 +83,12 @@
     "preco_sem_desconto": "0",
     "desconto": "0"
   },
-  {
-    "titulo": null,
-    "preco": null,
-    "preco_sem_desconto": "0",
-    "desconto": "0"
-  },
+  //  {
+  //    "titulo": null,
+  //    "preco": null,
+  //    "preco_sem_desconto": "0",
+  //    "desconto": "0"
+  //  },
   {
     "titulo": "Minit",
     "preco": "R$ 18,99",
@@ -167,12 +167,12 @@
     "preco_sem_desconto": "0",
     "desconto": "0"
   },
-  {
-    "titulo": "Just Die Already",
-    "preco": null,
-    "preco_sem_desconto": "R$ 28,99",
-    "desconto": "-100%"
-  },
+  //  {
+  //    "titulo": "Just Die Already",
+  //    "preco": null,
+  //    "preco_sem_desconto": "R$ 28,99",
+  //    "desconto": "-100%"
+  //  },
   {
     "titulo": "FAR CRY 4",
     "preco": "R$ 89,99",

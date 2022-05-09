@@ -89,11 +89,10 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
                     "ORDER BY data_registro DESC,preco DESC LIMIT 12;";
 
-    //fazer uma query bacana aqui (ou nao)
-    private static final String GET_TOP_DRIP =
+    private static final String GET_TOP_PROMO_HOJE =
             "SELECT * " +
                     "FROM bd2021.preco_data INNER JOIN bd2021.jogo ON preco_data.jogo_id = jogo.id " +
-                    "ORDER BY data_registro DESC,preco DESC LIMIT 12;";
+                    "ORDER BY data_registro DESC,porcentagem_promo DESC LIMIT 12;";
 
     private static final String GET_TOP_PROMO =
             "SELECT * " +
@@ -407,9 +406,9 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     }
 
     @Override
-    public List<PrecoJogo> readTopDrip() throws SQLException {
+    public List<PrecoJogo> readTopPromoHoje() throws SQLException {
         List<PrecoJogo> precoJogoList = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_DRIP);
+        try (PreparedStatement statement = connection.prepareStatement(GET_TOP_PROMO_HOJE);
              ResultSet result = statement.executeQuery()) {
             while (result.next()) {
                 PrecoJogo preco_jogo = new PrecoJogo();
@@ -427,6 +426,7 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
         }
         return precoJogoList;
     }
+
 
     @Override
     public List<PrecoJogo> showAll() throws SQLException {

@@ -24,24 +24,25 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="button">
         <a style="color: #fff; text-decoration: none"
-           href="${pageContext.servletContext.contextPath}/jogo/top-promocao" methods="GET">
-            TOP PROMOÇÕES
-        </a>
-    </button>
-
-    <button class="btn btn-lg btn-primary btn-block" type="button">
-        <a style="color: #fff; text-decoration: none"
-           href="${pageContext.servletContext.contextPath}/jogo/top-drip" methods="GET">
-            TOP DRIP
-        </a>
-    </button>
-
-    <button class="btn btn-lg btn-primary btn-block" type="button">
-        <a style="color: #fff; text-decoration: none"
            href="${pageContext.servletContext.contextPath}/jogo/top-caro" methods="GET">
-            TOP RIM
+            TOP TÁ CARO
         </a>
     </button>
+
+    <button class="btn btn-lg btn-primary btn-block" type="button">
+        <a style="color: #fff; text-decoration: none"
+           href="${pageContext.servletContext.contextPath}/jogo/top-hoje" methods="GET">
+            TOP PROMOÇÕES HOJE
+        </a>
+    </button>
+
+    <button class="btn btn-lg btn-primary btn-block" type="button">
+        <a style="color: #fff; text-decoration: none"
+           href="${pageContext.servletContext.contextPath}/jogo/top-promocao" methods="GET">
+            TOP PROMOÇÕES DE TODOS OS TEMPOS
+        </a>
+    </button>
+
     <br><br>
     <div class="container">
         <div class="row">
@@ -55,10 +56,23 @@
                             </div>
                             <div class="card-body">
                                 <p class="card-text"><c:out value="${jogo.titulo}"/></p>
-                                <p class="card-text">Preço:<c:out value="${jogo.preco}"/></p>
-                                <p class="card-text">Promo:<c:out value="${jogo.porcentagem_promo}"/>%</p>
-                                <img src="${pageContext.request.contextPath}/img/epic.png"
-                                     height="50px" width="50px"/>
+                                <p class="card-text">Preço: <c:out value="${jogo.preco}"/></p>
+                                <p class="card-text">Promo: <c:out value="${jogo.porcentagem_promo}"/>%</p>
+                                <p class="card-text">Data: <c:out value="${jogo.data_registro}"/></p>
+                                <c:choose>
+                                    <c:when test="${jogo.loja_id == '1'}">
+                                        <img src="${pageContext.request.contextPath}/img/epic.png"
+                                             height="50px" width="50px"/>
+                                    </c:when>
+                                    <c:when test="${jogo.loja_id == '2'}">
+                                        <img src="${pageContext.request.contextPath}/img/steam.png"
+                                             height="50px" width="50px"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}/img/nuuvem.svg"
+                                             height="50px" width="50px"/>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </a>
                     </div>

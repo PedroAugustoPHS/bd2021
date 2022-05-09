@@ -21,7 +21,7 @@ public interface PrecoDataDAO extends DAO<PrecoData> {
 
     List<PrecoJogo> readTopPromo() throws SQLException;
 
-    List<PrecoJogo> readTopDrip() throws SQLException;
+    List<PrecoJogo> readTopPromoHoje() throws SQLException;
 
     List<PrecoJogo> showAll() throws SQLException;
 }
