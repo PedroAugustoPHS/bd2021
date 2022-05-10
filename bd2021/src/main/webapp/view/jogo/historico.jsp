@@ -16,10 +16,16 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages': ['line']});
-        google.charts.setOnLoadCallback(drawChart);
-        var preco1 = ${pd1};
-        var preco2 = '${pd2}';
-        var preco3 = '${pd3}';
+        google.charts.setOnLoadCallback(drawChartEpic);
+        google.charts.setOnLoadCallback(drawChartSteam);
+        google.charts.setOnLoadCallback(drawChartNuuvem);
+
+        var data1 = [];
+        var preco1 = ${preco1};
+        var data1 = '${data1}';
+        data1aux = data1.slice(1, -1);
+        data1 = data1aux.split(",");
+
 
         function drawChart() {
 
@@ -54,6 +60,78 @@
             var chart = new google.charts.Line(document.getElementById('line_top_x'));
 
             chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+
+        var data2 = [];
+        var preco2 = ${preco2};
+        var data2 = '${data2}';
+        data2aux = data2.slice(1, -1);
+        data2 = data2aux.split(",");
+
+        function drawChartSteam() {
+            var dataArray = [
+                ['Data', 'Steam'],
+            ];
+
+            for (var i = 0; i < preco2.length; i++) {
+                var row = [new Date(data2[i]), preco2[i]];
+                dataArray.push(row);
+
+            }
+            var data = google.visualization.arrayToDataTable(dataArray)
+
+            var options = {
+                title: 'Histórico de Preços da Steam',
+                hAxis: {
+                    format: 'YYYY-MM-dd',
+                },
+
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#00FF00'}
+                }
+
+            };
+
+            var chart = new google.charts.Line(document.getElementById('steam_chart'));
+            chart.draw(data, options);
+        }
+
+
+        var data3 = [];
+        var preco3 = ${preco3};
+        var data3 = '${data3}';
+        data3aux = data3.slice(1, -1);
+        data3 = data3aux.split(",");
+
+        function drawChartNuuvem() {
+            var dataArray = [
+                ['Data', 'Nuuvem'],
+            ];
+
+            for (var i = 0; i < preco3.length; i++) {
+                var row = [new Date(data3[i]), preco3[i]];
+                dataArray.push(row);
+
+            }
+            var data = google.visualization.arrayToDataTable(dataArray)
+
+            var options = {
+                title: 'Histórico de Preços da Nuuvem',
+
+                hAxis: {
+                    format: 'YYYY-MM-dd',
+                },
+
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#0000FF'}
+                }
+
+            };
+
+            var chart = new google.charts.Line(document.getElementById('nuuvem_chart'));
+            chart.draw(data, options);
         }
     </script>
 </head>

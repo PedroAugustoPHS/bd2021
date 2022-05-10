@@ -31,6 +31,18 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
                     "WHERE jogo_id = ? AND loja_id = ? " +
                     "ORDER BY data_registro DESC ;";
 
+    private static final String PRECO_GRAFO_QUERY =
+            "SELECT preco " +
+                    "FROM bd2021.preco_data " +
+                    "WHERE jogo_id = ? AND loja_id = ? " +
+                    "ORDER BY data_registro DESC ;";
+
+    private static final String DATA_GRAFO_QUERY =
+            "SELECT data_registro " +
+                    "FROM bd2021.preco_data " +
+                    "WHERE jogo_id = ? AND loja_id = ? " +
+                    "ORDER BY data_registro DESC ;";
+
     private static final String UPDATE_QUERY =
             "UPDATE bd2021.preco_data " +
                     "SET preco = ?, porcentagem_promo = ? " +

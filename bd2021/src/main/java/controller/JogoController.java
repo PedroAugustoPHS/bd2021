@@ -112,13 +112,19 @@ public class JogoController extends HttpServlet {
 
                     hist2 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 2);
                     request.setAttribute("histL2", hist2);
-                    pd2 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 2);
-                    request.setAttribute("pd2", pd2);
+                    preco2 = daoPD.getPrecoQuery(Integer.parseInt(request.getParameter("id")), 2);
+                    request.setAttribute("preco2", preco2);
+                    data2 = daoPD.getDataQuery(Integer.parseInt(request.getParameter("id")), 2);
+                    request.setAttribute("data2", data2);
+
 
                     hist3 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 3);
                     request.setAttribute("histL3", hist3);
-                    pd3 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 3);
-                    request.setAttribute("pd3", pd3);
+                    preco3 = daoPD.getPrecoQuery(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("preco3", preco3);
+                    data3 = daoPD.getDataQuery(Integer.parseInt(request.getParameter("id")), 3);
+                    request.setAttribute("data3", data3);
+
 
                 } catch (ClassNotFoundException | IOException | SQLException ex) {
                     request.getSession().setAttribute("error", ex.getMessage());
