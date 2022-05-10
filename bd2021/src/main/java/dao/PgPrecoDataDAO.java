@@ -160,6 +160,42 @@ public class PgPrecoDataDAO implements PrecoDataDAO{
     }
 
     @Override
+    public List<Float> getPrecoQuery(Integer jogo_id, Integer loja_id) throws SQLException {
+        List<Float> listP = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(PRECO_GRAFO_QUERY)) {
+            statement.setInt(1, jogo_id);
+            statement.setInt(2, loja_id);
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Float preco = result.getFloat("preco");
+
+                    listP.add(preco);
+                }
+            }
+            return listP;
+        }
+    }
+
+    @Override
+    public List<Date> getDataQuery(Integer jogo_id, Integer loja_id) throws SQLException {
+        List<Date> listP = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement(DATA_GRAFO_QUERY)) {
+            statement.setInt(1, jogo_id);
+            statement.setInt(2, loja_id);
+            try (ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    Date data = result.getDate("data_registro");
+
+                    listP.add(data);
+                }
+            }
+            return listP;
+        }
+    }
+
+    @Override
     public PrecoData readPrecoData(Date data_registro, Integer jogo_id, Integer loja_id) throws SQLException {
         PrecoData preco_data = new PrecoData();
 

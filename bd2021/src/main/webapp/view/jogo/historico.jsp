@@ -27,39 +27,33 @@
         data1 = data1aux.split(",");
 
 
-        function drawChart() {
+        function drawChartEpic() {
+            var dataArray = [
+                ['Data', 'Epic'],
+            ];
 
-            var data = new google.visualization.DataTable();
-            console.log(preco1[0]["preco"]);
+            for (var i = 0; i < preco1.length; i++) {
+                var row = [new Date(data1[i]), preco1[i]];
+                dataArray.push(row);
 
-            data.addColumn('date', 'Data');
-            data.addColumn('number', 'Epic');
-            data.addColumn('number', 'Steam');
-            data.addColumn('number', 'Nuuvem');
-
-            data.addRows([
-                [new Date("2022-01-17"), preco1[0]["preco"], 80.8, 41.8],
-                [new Date("2022-01-21"), 30.9, 69.5, 32.4],
-                [new Date("2022-01-24"), 25.4, 57, 25.7],
-                [new Date("2022-01-28"),  11.7, 18.8, 10.5],
-            ]);
+            }
+            var data = google.visualization.arrayToDataTable(dataArray)
 
             var options = {
-                chart: {
-                    title: 'Lista de Preços',
+                title: 'Histórico de Preços da EpicStore',
+
+                hAxis: {
+                    format: 'YYYY-MM-dd',
                 },
-                width: 900,
-                height: 500,
-                axes: {
-                    x: {
-                        0: {side: 'bottom'}
-                    }
+
+                legend: {position: 'bottom'},
+                series: {
+                    0: {color: '#e2431e'}
                 }
             };
 
-            var chart = new google.charts.Line(document.getElementById('line_top_x'));
-
-            chart.draw(data, google.charts.Line.convertOptions(options));
+            var chart = new google.charts.Line(document.getElementById('epic_chart'));
+            chart.draw(data, options);
         }
 
         var data2 = [];
@@ -165,15 +159,15 @@
             <span>Média de preço: ${histL3.media_preco} </span><br>
         </div>
     </div>
-    <br><br>
-    <div id="line_top_x"></div>
-    <div>
-        <c:forEach items="${pd1}" var="item">
-            ${item.preco}<br>
-            ${item.preco}<br>
-            ${item.preco}<br>
-        </c:forEach>
-    </div>
+    <br>
+    <hr>
+    <br>
+    <div id="epic_chart" style="width: 900px; height: 400px"></div>
+    <br>
+    <div id="steam_chart" style="width: 900px; height: 400px"></div>
+    <br>
+    <div id="nuuvem_chart" style="width: 900px; height: 400px"></div>
+    <br>
 </div>
 </body>
 </html>

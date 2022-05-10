@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 //import static sun.font.CreatedFontTracker.MAX_FILE_SIZE;
@@ -66,6 +67,12 @@ public class JogoController extends HttpServlet {
         List<PrecoData> pd2;
         List<PrecoData> pd3;
         List<PrecoJogo> pdJ;
+        List<Date> data1;
+        List<Date> data2;
+        List<Date> data3;
+        List<Float> preco1;
+        List<Float> preco2;
+        List<Float> preco3;
 
         RequestDispatcher dispatcher;
 
@@ -107,8 +114,10 @@ public class JogoController extends HttpServlet {
 
                     hist1 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 1);
                     request.setAttribute("histL1", hist1);
-                    pd1 = daoPD.readPreco(Integer.parseInt(request.getParameter("id")), 1);
-                    request.setAttribute("pd1", pd1);
+                    preco1 = daoPD.getPrecoQuery(Integer.parseInt(request.getParameter("id")), 1);
+                    request.setAttribute("preco1", preco1);
+                    data1 = daoPD.getDataQuery(Integer.parseInt(request.getParameter("id")), 1);
+                    request.setAttribute("data1", data1);
 
                     hist2 = daoH.readHist(Integer.parseInt(request.getParameter("id")), 2);
                     request.setAttribute("histL2", hist2);
